@@ -81,36 +81,91 @@ footer{
   margin-top:1rem; font-family:var(--f-mono); font-size:.75rem; color:var(--ink-3);
   border-top:1px solid var(--rule); padding-top:1rem; width:100%; max-width:46rem;
 }
+.gswitch{display:flex; align-items:center; gap:.5rem; font-family:var(--f-mono); font-size:.63rem;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3)}
+.pill{display:inline-flex; border:1px solid var(--rule-strong); border-radius:999px; overflow:hidden; background:var(--surface)}
+.pill button{font:inherit; font-family:var(--f-mono); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
+  border:0; background:transparent; color:var(--ink-2); padding:.34rem .7rem; cursor:pointer}
+.pill button[aria-pressed="true"]{background:var(--accent); color:var(--surface)}
+[data-lang="en"] > .sk, [data-lang="sk"] > .en{display:none}
+.top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap}
 </style>
 </head>
 <body>
-<main>
-  <div>
+<main data-lang="en">
+  <div class="top-row">
     <span class="eyebrow">Claude Certified Associate — Foundations</span>
+    <span class="gswitch">Language
+      <span class="pill">
+        <button type="button" data-all="en" aria-pressed="true">EN</button>
+        <button type="button" data-all="sk" aria-pressed="false">SK</button>
+      </span>
+    </span>
+  </div>
+
+  <div class="en">
     <h1>Prep course study pages</h1>
     <p class="sub">Two self-contained, bilingual (EN/SK) pages built from the prep course modules. Pick one to open.</p>
+
+    <div class="list">
+      <a class="card" href="claude-platform-model-foundations.html">
+        <span class="num">01</span>
+        <span class="meta">
+          <h2>Claude Platform &amp; Model Foundations</h2>
+          <p>How Claude behaves, core entry points, capability layer, choosing models, context management, exercise, quiz.</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="card" href="claude-101.html">
+        <span class="num">02</span>
+        <span class="meta">
+          <h2>Claude 101</h2>
+          <p>Meeting Claude, organizing work and knowledge, expanding Claude's reach, real-world use cases, self-test.</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <footer>Each page toggles English/Slovak per section and works fully offline — no external scripts, styles, or fonts.</footer>
   </div>
 
-  <div class="list">
-    <a class="card" href="claude-platform-model-foundations.html">
-      <span class="num">01</span>
-      <span class="meta">
-        <h2>Claude Platform &amp; Model Foundations</h2>
-        <p>How Claude behaves, core entry points, capability layer, choosing models, context management, exercise, quiz.</p>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-    <a class="card" href="claude-101.html">
-      <span class="num">02</span>
-      <span class="meta">
-        <h2>Claude 101</h2>
-        <p>Meeting Claude, organizing work and knowledge, expanding Claude's reach, real-world use cases, self-test.</p>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
+  <div class="sk">
+    <h1>Študijné stránky prípravného kurzu</h1>
+    <p class="sub">Dve samostatné, dvojjazyčné (EN/SK) stránky vytvorené z modulov prípravného kurzu. Vyberte si jednu na otvorenie.</p>
 
-  <footer>Each page toggles English/Slovak per section and works fully offline — no external scripts, styles, or fonts.</footer>
+    <div class="list">
+      <a class="card" href="claude-platform-model-foundations.html">
+        <span class="num">01</span>
+        <span class="meta">
+          <h2>Základy platformy Claude a výberu modelu</h2>
+          <p>Ako sa Claude správa, hlavné vstupné body, vrstva schopností, výber modelov, práca s kontextom, cvičenie, kvíz.</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="card" href="claude-101.html">
+        <span class="num">02</span>
+        <span class="meta">
+          <h2>Claude 101</h2>
+          <p>Zoznámenie s Claude, organizácia práce a vedomostí, rozšírenie dosahu Claude, reálne prípady použitia, sebatest.</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <footer>Každá stránka umožňuje prepínať angličtinu/slovenčinu v jednotlivých sekciách a funguje úplne offline — bez externých skriptov, štýlov alebo fontov.</footer>
+  </div>
 </main>
+<script>
+document.addEventListener("click", function(e){
+  var btn = e.target.closest("[data-all]");
+  if (!btn) return;
+  var lang = btn.getAttribute("data-all");
+  var main = document.querySelector("main");
+  main.setAttribute("data-lang", lang);
+  document.querySelectorAll("[data-all]").forEach(function(b){
+    b.setAttribute("aria-pressed", b.getAttribute("data-all") === lang ? "true" : "false");
+  });
+});
+</script>
 </body>
 </html>

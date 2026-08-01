@@ -56,6 +56,9 @@ a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;gap:1rem;min-height:3.4rem;flex-wrap:wrap}
+.back{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--accent)}
 .brand{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--ink-3);margin-right:auto}
 .brand b{color:var(--ink);font-weight:600}
@@ -169,6 +172,7 @@ footer ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:.4rem
 
 <header class="top">
   <div class="wrap">
+    <a class="back" href="index.html">&larr; Index</a>
     <span class="brand"><b>Claude 101</b> · study notes</span>
     <span class="gswitch">All sections
       <span class="pill">
@@ -181,17 +185,37 @@ footer ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:.4rem
 
 <main class="wrap">
 
-<section class="hero">
-  <span class="eyebrow">Anthropic course · bilingual EN / SK</span>
-  <h1>Claude 101</h1>
-  <p class="lede">What Claude is, how to talk to it, how to give it structure and reach — and how to tell which shape of work you're actually in. Every section below reads in English or Slovak; the switch is on the left of each one.</p>
-  <ol class="spine">
-    <li><span class="n">01</span><span class="t">Meet Claude</span><span class="d">What Claude is, your first conversation, getting better results, and the three shapes of desktop work.</span></li>
-    <li><span class="n">02</span><span class="t">Organizing your work</span><span class="d">Projects hold knowledge, Artifacts hold outputs, Skills hold process.</span></li>
-    <li><span class="n">03</span><span class="t">Expanding Claude's reach</span><span class="d">Connectors, Enterprise Search, and Research bring your tools and the web in.</span></li>
-    <li><span class="n">04</span><span class="t">Putting it together</span><span class="d">Use cases by role, and the other places Claude lives.</span></li>
-    <li><span class="n">05</span><span class="t">What's next</span><span class="d">The recap, and the one task to try this week.</span></li>
-  </ol>
+<section class="hero" data-lang="en">
+  <span class="pill lswitch" role="group" aria-label="Language for this section">
+    <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+  </span>
+
+  <div class="en">
+    <span class="eyebrow">Anthropic course · bilingual EN / SK</span>
+    <h1>Claude 101</h1>
+    <p class="lede">What Claude is, how to talk to it, how to give it structure and reach — and how to tell which shape of work you're actually in. Every section below reads in English or Slovak; the switch is on the left of each one.</p>
+    <ol class="spine">
+      <li><span class="n">01</span><span class="t">Meet Claude</span><span class="d">What Claude is, your first conversation, getting better results, and the three shapes of desktop work.</span></li>
+      <li><span class="n">02</span><span class="t">Organizing your work</span><span class="d">Projects hold knowledge, Artifacts hold outputs, Skills hold process.</span></li>
+      <li><span class="n">03</span><span class="t">Expanding Claude's reach</span><span class="d">Connectors, Enterprise Search, and Research bring your tools and the web in.</span></li>
+      <li><span class="n">04</span><span class="t">Putting it together</span><span class="d">Use cases by role, and the other places Claude lives.</span></li>
+      <li><span class="n">05</span><span class="t">What's next</span><span class="d">The recap, and the one task to try this week.</span></li>
+    </ol>
+  </div>
+
+  <div class="sk">
+    <span class="eyebrow">Kurz Anthropic · dvojjazyčný EN / SK</span>
+    <h1>Claude 101</h1>
+    <p class="lede">Čo je Claude, ako sa s ním rozprávať, ako mu dať štruktúru a dosah — a ako rozpoznať, o aký typ práce práve ide. Každá sekcia nižšie sa dá čítať po anglicky alebo po slovensky; prepínač je vľavo pri každej z nich.</p>
+    <ol class="spine">
+      <li><span class="n">01</span><span class="t">Spoznajte Claude</span><span class="d">Čo je Claude, vaša prvá konverzácia, ako dosiahnuť lepšie výsledky a tri podoby práce na počítači.</span></li>
+      <li><span class="n">02</span><span class="t">Organizácia vašej práce</span><span class="d">Projects uchovávajú vedomosti, Artifacts uchovávajú výstupy, Skills uchovávajú postup.</span></li>
+      <li><span class="n">03</span><span class="t">Rozšírenie dosahu Claude</span><span class="d">Connectors, Enterprise Search a Research prinášajú vaše nástroje a web priamo dovnútra.</span></li>
+      <li><span class="n">04</span><span class="t">Poskladanie dokopy</span><span class="d">Prípady použitia podľa roly a ďalšie miesta, kde Claude žije.</span></li>
+      <li><span class="n">05</span><span class="t">Čo bude ďalej</span><span class="d">Zhrnutie a jedna úloha, ktorú vyskúšať tento týždeň.</span></li>
+    </ol>
+  </div>
 </section>
 
 <div class="mod">
