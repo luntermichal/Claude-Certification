@@ -1,0 +1,1645 @@
+<title>Claude 101 — bilingual study page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Claude 101 course notes with per-section English/Slovak toggles and revealable exercises.">
+
+<style>
+:root{
+  --paper:#F2F3F7; --surface:#FFFFFF; --surface-2:#E7EAF2;
+  --ink:#15182B; --ink-2:#4A5068; --ink-3:#6F7690;
+  --rule:#D5D9E6; --rule-strong:#B4BBD1;
+  --accent:#3A4CB8; --accent-deep:#232F80; --accent-soft:#E4E8FA;
+  --amber:#9A5B12; --amber-soft:#F7ECD9;
+  --lift:0 1px 0 rgba(21,24,43,.03), 0 14px 30px -24px rgba(21,24,43,.55);
+  --f-display:Corbel,Candara,Optima,"Gill Sans MT","Segoe UI",system-ui,sans-serif;
+  --f-body:Constantia,Georgia,"Book Antiqua",Palatino,"Palatino Linotype",serif;
+  --f-mono:"Cascadia Mono",Consolas,"SF Mono",ui-monospace,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0F1119; --surface:#171A25; --surface-2:#1F2431;
+    --ink:#E7EAF3; --ink-2:#AEB5C9; --ink-3:#868EA6;
+    --rule:#2A3040; --rule-strong:#3C4457;
+    --accent:#8D9CF0; --accent-deep:#B3BEF8; --accent-soft:#1E2440;
+    --amber:#DCA85C; --amber-soft:#2C2416;
+    --lift:0 1px 0 rgba(0,0,0,.2), 0 16px 34px -26px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1119; --surface:#171A25; --surface-2:#1F2431;
+  --ink:#E7EAF3; --ink-2:#AEB5C9; --ink-3:#868EA6;
+  --rule:#2A3040; --rule-strong:#3C4457;
+  --accent:#8D9CF0; --accent-deep:#B3BEF8; --accent-soft:#1E2440;
+  --amber:#DCA85C; --amber-soft:#2C2416;
+  --lift:0 1px 0 rgba(0,0,0,.2), 0 16px 34px -26px rgba(0,0,0,.9);
+}
+:root[data-theme="light"]{
+  --paper:#F2F3F7; --surface:#FFFFFF; --surface-2:#E7EAF2;
+  --ink:#15182B; --ink-2:#4A5068; --ink-3:#6F7690;
+  --rule:#D5D9E6; --rule-strong:#B4BBD1;
+  --accent:#3A4CB8; --accent-deep:#232F80; --accent-soft:#E4E8FA;
+  --amber:#9A5B12; --amber-soft:#F7ECD9;
+  --lift:0 1px 0 rgba(21,24,43,.03), 0 14px 30px -24px rgba(21,24,43,.55);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-body);font-size:clamp(1rem,.55vw + .88rem,1.075rem);line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:78rem;margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem)}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0;font-weight:600}
+p,ul,ol,dl,table{margin:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:1rem;min-height:3.4rem;flex-wrap:wrap}
+.brand{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin-right:auto}
+.brand b{color:var(--ink);font-weight:600}
+.gswitch{display:flex;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.63rem;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.pill{display:inline-flex;border:1px solid var(--rule-strong);border-radius:999px;overflow:hidden;background:var(--surface)}
+.pill button{font:inherit;font-family:var(--f-mono);font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;
+  border:0;background:transparent;color:var(--ink-2);padding:.34rem .7rem;cursor:pointer}
+.pill button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem);border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  display:block;margin-bottom:1rem}
+.hero h1{font-size:clamp(2.4rem,6.5vw,4.4rem);letter-spacing:-.02em;max-width:26ch}
+.hero .lede{margin-top:1.4rem;max-width:60ch;font-size:1.1em;color:var(--ink-2)}
+.spine{margin-top:clamp(2rem,5vw,3rem);display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+@media (min-width:52rem){.spine{grid-template-columns:repeat(5,1fr)}}
+.spine li{list-style:none;background:var(--surface);padding:1.05rem 1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.spine .n{font-family:var(--f-mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em}
+.spine .t{font-family:var(--f-display);font-weight:600;font-size:.98rem;line-height:1.25}
+.spine .d{font-size:.82rem;color:var(--ink-3);line-height:1.45}
+
+/* ---------- modules & sections ---------- */
+.mod{border-top:1px solid var(--rule-strong);padding-top:clamp(1.6rem,4vw,2.6rem);margin-top:clamp(2rem,5vw,3.5rem)}
+.mod-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.mod-head .num{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.18em;color:var(--accent);
+  border:1px solid var(--accent);border-radius:999px;padding:.2rem .6rem}
+.mod-head h2{font-size:clamp(1.5rem,3.4vw,2.2rem);letter-spacing:-.01em}
+
+.sec{display:grid;gap:clamp(1.1rem,3vw,2.6rem);padding:clamp(2rem,4.5vw,3.2rem) 0;border-top:1px solid var(--rule)}
+@media (min-width:64rem){.sec{grid-template-columns:10rem minmax(0,68ch)}}
+.rail{display:flex;flex-direction:column;gap:.7rem}
+@media (min-width:64rem){.rail{position:sticky;top:4.4rem;align-self:start}}
+.rail .lbl{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.rail .time{font-family:var(--f-mono);font-size:.63rem;color:var(--amber)}
+
+.sec h3{font-size:clamp(1.35rem,2.6vw,1.85rem);letter-spacing:-.01em}
+.sec h4{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:600;margin-top:.35rem}
+.en,.sk{display:flex;flex-direction:column;gap:1.1rem;min-width:0}
+[data-lang="en"] > .sk, [data-lang="sk"] > .en{display:none}
+
+/* ---------- content bits ---------- */
+ul.b,ol.b{padding-left:1.15rem;display:flex;flex-direction:column;gap:.55rem}
+ul.b{list-style:none;padding-left:0}
+ul.b > li{position:relative;padding-left:1.1rem}
+ul.b > li::before{content:"";position:absolute;left:.1rem;top:.68em;width:.34rem;height:.34rem;
+  background:var(--accent);border-radius:50%}
+ol.b > li{padding-left:.25rem}
+ol.b > li::marker{font-family:var(--f-mono);font-size:.85em;color:var(--accent)}
+ul.b ul{margin-top:.5rem;list-style:none;padding-left:0;display:flex;flex-direction:column;gap:.35rem}
+ul.b ul li{position:relative;padding-left:1.05rem;color:var(--ink-2);font-size:.94em}
+ul.b ul li::before{content:"–";position:absolute;left:0;color:var(--ink-3)}
+
+.note{border-left:2px solid var(--accent);background:var(--accent-soft);padding:.85rem 1.05rem;border-radius:0 3px 3px 0}
+.note.warm{border-color:var(--amber);background:var(--amber-soft)}
+.note .k{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);display:block;margin-bottom:.3rem}
+.note.warm .k{color:var(--amber)}
+blockquote{margin:0;padding:1rem 1.15rem;background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  font-style:italic;color:var(--ink-2);box-shadow:var(--lift)}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:1.05rem 1.15rem;
+  box-shadow:var(--lift);display:flex;flex-direction:column;gap:.6rem}
+.card h5{margin:0;font-family:var(--f-display);font-size:1rem;font-weight:600}
+.cards{display:grid;gap:.85rem}
+@media (min-width:44rem){.cards.two{grid-template-columns:1fr 1fr}}
+dl.d{display:flex;flex-direction:column;gap:.7rem}
+dl.d dt{font-family:var(--f-display);font-weight:600}
+dl.d dd{margin:.15rem 0 0;color:var(--ink-2)}
+
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface);box-shadow:var(--lift)}
+table{border-collapse:collapse;width:100%;font-size:.93em}
+th,td{text-align:left;vertical-align:top;padding:.66rem .8rem;border-bottom:1px solid var(--rule)}
+th{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  background:var(--surface-2);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ink)}
+.num td{font-variant-numeric:tabular-nums}
+
+.chip{display:inline-block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;
+  border:1px solid var(--rule-strong);border-radius:999px;padding:.14rem .55rem;color:var(--ink-2);white-space:nowrap}
+.chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-deep)}
+
+/* ---------- reveals ---------- */
+.rbtn{font:inherit;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  align-self:flex-start;border:1px solid var(--accent);color:var(--accent);background:transparent;
+  padding:.4rem .85rem;border-radius:999px;cursor:pointer}
+.rbtn:hover{background:var(--accent-soft)}
+.hidden-until-reveal{display:none;flex-direction:column;gap:1rem}
+.revealed .hidden-until-reveal{display:flex}
+.revealed .rbtn{display:none}
+
+/* ---------- quiz ---------- */
+.q{border:1px solid var(--rule);border-radius:3px;background:var(--surface);box-shadow:var(--lift);
+  padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.9rem}
+.q-head{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.q-head .qn{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.q-head .pill{margin-left:auto}
+ol.opts{list-style:none;padding:0;display:flex;flex-direction:column;gap:.4rem}
+ol.opts li{border:1px solid var(--rule);border-radius:2px;padding:.5rem .7rem;color:var(--ink-2);font-size:.95em}
+.revealed ol.opts li.correct{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.qs{display:flex;flex-direction:column;gap:1rem}
+
+footer{border-top:1px solid var(--rule-strong);margin-top:clamp(2.5rem,6vw,4rem);
+  padding:clamp(2rem,4vw,3rem) 0 clamp(3rem,6vw,4.5rem);color:var(--ink-3);font-size:.88em}
+footer h4{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:.7rem}
+footer ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:.4rem}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand"><b>Claude 101</b> · study notes</span>
+    <span class="gswitch">All sections
+      <span class="pill">
+        <button type="button" data-all="en" aria-pressed="true">EN</button>
+        <button type="button" data-all="sk" aria-pressed="false">SK</button>
+      </span>
+    </span>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <span class="eyebrow">Anthropic course · bilingual EN / SK</span>
+  <h1>Claude 101</h1>
+  <p class="lede">What Claude is, how to talk to it, how to give it structure and reach — and how to tell which shape of work you're actually in. Every section below reads in English or Slovak; the switch is on the left of each one.</p>
+  <ol class="spine">
+    <li><span class="n">01</span><span class="t">Meet Claude</span><span class="d">What Claude is, your first conversation, getting better results, and the three shapes of desktop work.</span></li>
+    <li><span class="n">02</span><span class="t">Organizing your work</span><span class="d">Projects hold knowledge, Artifacts hold outputs, Skills hold process.</span></li>
+    <li><span class="n">03</span><span class="t">Expanding Claude's reach</span><span class="d">Connectors, Enterprise Search, and Research bring your tools and the web in.</span></li>
+    <li><span class="n">04</span><span class="t">Putting it together</span><span class="d">Use cases by role, and the other places Claude lives.</span></li>
+    <li><span class="n">05</span><span class="t">What's next</span><span class="d">The recap, and the one task to try this week.</span></li>
+  </ol>
+</section>
+
+<div class="mod">
+  <div class="mod-head"><span class="num">Module 01</span><h2>Meet Claude</h2></div>
+</div>
+<section class="sec" id="what-is-claude" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 1.1</span>
+    <span class="time">15 min</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>What is Claude</h3>
+    <p>Claude is more than a chatbot — it's an AI assistant designed to be your thinking partner. This lesson covers what makes Claude different from other AI tools, and how it can help across a wide variety of work tasks.</p>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what Claude is and the principles that guide its design</li>
+      <li>Describe Claude's core capabilities and how it differs from a simple chatbot</li>
+      <li>Identify the different ways to access Claude (web, desktop, and mobile)</li>
+    </ul>
+
+    <h4>Key takeaways</h4>
+    <dl class="d">
+      <dt>Claude is built to be helpful, harmless, and honest.</dt>
+      <dd>Claude is guided by principles that help it avoid toxic or discriminatory outputs, avoid helping humans engage in illegal or unethical activities, and broadly behave as a helpful, honest, and harmless AI system. This approach, called <b>Constitutional AI</b>, means Claude is trained to align with human values and operate transparently.</dd>
+      <dt>Claude is more than a chatbot.</dt>
+      <dd>It handles a wide variety of conversational and text-processing tasks while staying reliable and predictable — summarization, search, creative and collaborative writing, Q&amp;A, coding, and more. Think of Claude as a thinking partner for complex problems, not just an answer machine for simple questions.</dd>
+      <dt>Claude is designed to be steerable and collaborative.</dt>
+      <dd>Claude takes direction on personality, tone, and behavior. Customers report that Claude is much less likely to produce harmful outputs, easier to converse with, and more steerable — so you reach your desired output with less effort.</dd>
+      <dt>You can access Claude wherever you work.</dt>
+      <dd>Claude apps are available on Free, Pro, Max, Team, and Enterprise. Conversations, projects, memory, and preferences sync across all devices when you're signed in — web, desktop, and mobile.</dd>
+    </dl>
+
+    <h4>Sort six requests</h4>
+    <p>Six requests. Three belong in a search box, three need a thinking partner. The line was never the topic — reviews, invoices, and exchange rates could all be typed into a search box. What separates the columns is whether the answer needs <em>you</em> in it: your draft, your last deck, your read on the customer.</p>
+    <div class="card" data-reveal="sorter">
+      <button class="rbtn" type="button">Show the two columns</button>
+      <div class="hidden-until-reveal">
+        <div class="tw"><table>
+          <thead><tr><th>A search box handles these</th><th>These need Claude — and you</th></tr></thead>
+          <tbody>
+            <tr><td>"What's the exchange rate from US dollars to euros today?"</td><td>"Rewrite my update below so the delay reads as a decision, not an apology."</td></tr>
+            <tr><td>"What's the difference between a purchase order and an invoice?"</td><td>"Best structure for a quarterly business review presentation"</td></tr>
+            <tr><td>"How many working days are there between March 3 and March 24?"</td><td>"I've pasted a customer's complaint thread below. Help me work out what they're actually asking for before I reply."</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>A search box takes a question. Claude takes the situation.</b> The two that trip most people are the review structure and the invoice question — same subject matter, but one is typed as a query and the other handed over as a situation.</p>
+      </div>
+    </div>
+
+    <h4>A few things Claude excels at</h4>
+    <ul class="b">
+      <li><b>Writing and content creation.</b> Social posts, professional emails, complex reports. Because Claude takes direction on personality and tone, you can iterate together on structure and clarity until your voice comes through.</li>
+      <li><b>Research and analysis.</b> Explore research angles, compile findings, analyze data. Claude's large context window ingests 200K+ tokens — about 500 pages of text or more — with up to 1M tokens on Pro, Max, Team, and Enterprise plans using supported models.</li>
+      <li><b>Coding assistance.</b> One of Claude's greatest strengths: writing, debugging, and explaining code across many languages.</li>
+      <li><b>Problem-solving and reasoning.</b> Complex cognitive tasks, mathematics, strategic analysis. Claude can respond near-instantly or take time to reason first — a capability called <b>Thinking</b>.</li>
+      <li><b>Learning new things.</b> Claude adapts to your learning style and pace. <b>Learning mode</b> guides your reasoning rather than handing over answers, building critical thinking instead of dependence.</li>
+    </ul>
+
+    <h4>Ways to access Claude</h4>
+    <p>Claude is the intelligence. The same intelligence is available across multiple interfaces, each suited to different work.</p>
+    <dl class="d">
+      <dt>Claude.ai</dt><dd>With the mobile and desktop apps, the primary way most people interact with Claude: conversations, writing, research, analysis, file creation. This is the focus of the course.</dd>
+      <dt>Claude Code</dt><dd>An agentic coding tool built for developers, usable for all kinds of file manipulation. It edits files, runs commands, and creates commits directly.</dd>
+      <dt>@Claude</dt><dd>Claude inside Slack — in the AI assistant header from any channel, or by tagging @Claude in a thread. It searches your workspace's channels, DMs, and shared files for context.</dd>
+      <dt>Claude Design</dt><dd>A dedicated space for turning ideas into working interfaces. Describe what you want, or start from a sketch or screenshot, and Claude builds an interactive prototype.</dd>
+      <dt>Claude for Microsoft 365</dt><dd>Claude as a sidebar in Excel, PowerPoint, Word, and Outlook — analyze, draft, and edit inside the document you already have open.</dd>
+    </dl>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>What tasks in your current work might benefit from a thinking partner? Look at your calendar — or better, ask Claude to — and pick a few tasks Claude could support.</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Čo je Claude</h3>
+    <p>Claude je viac než chatbot — je to AI asistent navrhnutý ako váš partner na myslenie. Táto lekcia vysvetľuje, čím sa Claude odlišuje od iných AI nástrojov a ako vie pomôcť pri širokej škále pracovných úloh.</p>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je Claude a aké princípy usmerňujú jeho návrh</li>
+      <li>Opísať základné schopnosti Clauda a to, čím sa líši od jednoduchého chatbota</li>
+      <li>Rozlíšiť spôsoby prístupu k Claudovi (web, desktop, mobil)</li>
+    </ul>
+
+    <h4>Kľúčové body</h4>
+    <dl class="d">
+      <dt>Claude je postavený tak, aby bol užitočný, neškodný a čestný.</dt>
+      <dd>Claude sa riadi princípmi, ktoré mu pomáhajú vyhnúť sa toxickým či diskriminačným výstupom, nepomáhať pri nelegálnych alebo neetických činnostiach a celkovo sa správať ako užitočný, čestný a neškodný systém. Tento prístup sa nazýva <b>Constitutional AI</b> — Claude je trénovaný v súlade s ľudskými hodnotami a má fungovať transparentne.</dd>
+      <dt>Claude je viac než chatbot.</dt>
+      <dd>Zvláda širokú škálu konverzačných úloh a spracovania textu pri vysokej spoľahlivosti a predvídateľnosti — sumarizáciu, vyhľadávanie, kreatívne aj kolaboratívne písanie, otázky a odpovede, programovanie a ďalšie. Berte Clauda ako partnera na myslenie pri zložitých problémoch, nie len ako stroj na odpovede.</dd>
+      <dt>Claude je navrhnutý ako usmerniteľný a kolaboratívny.</dt>
+      <dd>Prijíma pokyny k osobnosti, tónu a správaniu. Zákazníci uvádzajú, že u Clauda je výrazne menšia pravdepodobnosť škodlivých výstupov, ľahšie sa s ním komunikuje a lepšie sa usmerňuje — k želanému výstupu sa teda dostanete s menšou námahou.</dd>
+      <dt>Claude je dostupný tam, kde pracujete.</dt>
+      <dd>Aplikácie Claude sú dostupné vo všetkých plánoch — Free, Pro, Max, Team aj Enterprise. Konverzácie, projekty, pamäť a preferencie sa po prihlásení synchronizujú medzi všetkými zariadeniami — web, desktop, mobil.</dd>
+    </dl>
+
+    <h4>Roztrieďte šesť požiadaviek</h4>
+    <p>Šesť požiadaviek. Tri patria do vyhľadávacieho okna, tri potrebujú partnera na myslenie. Rozdiel nikdy nebol v téme — recenzie, faktúry aj kurzy sa dajú napísať do vyhľadávača. Stĺpce oddeľuje to, či odpoveď potrebuje <em>vás</em>: váš návrh, vašu poslednú prezentáciu, váš odhad zákazníka.</p>
+    <div class="card" data-reveal="sorter">
+      <button class="rbtn" type="button">Zobraziť oba stĺpce</button>
+      <div class="hidden-until-reveal">
+        <div class="tw"><table>
+          <thead><tr><th>Toto zvládne vyhľadávacie okno</th><th>Toto potrebuje Clauda — a vás</th></tr></thead>
+          <tbody>
+            <tr><td>„Aký je dnes kurz amerického dolára k euru?“</td><td>„Prepíš moju správu nižšie tak, aby zdržanie vyznelo ako rozhodnutie, nie ako výhovorka.“</td></tr>
+            <tr><td>„Aký je rozdiel medzi objednávkou a faktúrou?“</td><td>„Najlepšia štruktúra prezentácie pre kvartálny business review“</td></tr>
+            <tr><td>„Koľko pracovných dní je medzi 3. a 24. marcom?“</td><td>„Nižšie som vložil sťažnosť zákazníka. Pomôž mi zistiť, o čo v skutočnosti žiada, ešte pred odpoveďou.“</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Vyhľadávacie okno berie otázku. Claude berie situáciu.</b> Najviac ľudí zmýli štruktúra prezentácie a otázka o faktúre — tá istá téma, len raz zadaná ako dopyt a raz odovzdaná ako situácia.</p>
+      </div>
+    </div>
+
+    <h4>V čom Claude vyniká</h4>
+    <ul class="b">
+      <li><b>Písanie a tvorba obsahu.</b> Príspevky na sociálne siete, profesionálne e-maily, zložité správy. Keďže Claude prijíma pokyny k osobnosti a tónu, môžete spolu iterovať na štruktúre a jasnosti, kým nezaznie váš hlas.</li>
+      <li><b>Výskum a analýza.</b> Skúmanie uhlov pohľadu, zhromažďovanie zistení, analýza dát. Veľké kontextové okno zvládne 200 000+ tokenov — približne 500 strán textu aj viac — a až 1 milión tokenov v plánoch Pro, Max, Team a Enterprise pri podporovaných modeloch.</li>
+      <li><b>Pomoc s kódom.</b> Jedna z najsilnejších stránok Clauda: písanie, ladenie a vysvetľovanie kódu vo viacerých jazykoch.</li>
+      <li><b>Riešenie problémov a uvažovanie.</b> Náročné kognitívne úlohy, matematika, strategická analýza. Claude môže odpovedať takmer okamžite, alebo si najprv vzať čas na uvažovanie — táto schopnosť sa nazýva <b>Thinking</b>.</li>
+      <li><b>Učenie sa nového.</b> Claude sa prispôsobí vášmu štýlu a tempu učenia. <b>Learning mode</b> vedie váš myšlienkový postup namiesto podávania hotových odpovedí, čím rozvíja kritické myslenie.</li>
+    </ul>
+
+    <h4>Spôsoby prístupu k Claudovi</h4>
+    <p>Claude je tá inteligencia. Tá istá inteligencia je dostupná cez viaceré rozhrania, každé vhodné na iný typ práce.</p>
+    <dl class="d">
+      <dt>Claude.ai</dt><dd>Spolu s mobilnou a desktopovou aplikáciou hlavný spôsob, akým s Claudom pracuje väčšina ľudí: konverzácie, písanie, výskum, analýza, tvorba súborov. Na to sa tento kurz sústredí.</dd>
+      <dt>Claude Code</dt><dd>Agentický nástroj na programovanie určený vývojárom, použiteľný na rôznu prácu so súbormi. Priamo upravuje súbory, spúšťa príkazy a vytvára commity.</dd>
+      <dt>@Claude</dt><dd>Claude priamo v Slacku — v hlavičke AI asistenta v ktoromkoľvek kanáli, alebo označením @Claude vo vlákne. Prehľadáva kanály, priame správy a zdieľané súbory vášho workspace.</dd>
+      <dt>Claude Design</dt><dd>Samostatný priestor na premenu myšlienok na funkčné rozhrania. Opíšte, čo chcete — alebo začnite od skice či screenshotu — a Claude postaví interaktívny prototyp.</dd>
+      <dt>Claude for Microsoft 365</dt><dd>Claude ako bočný panel v Exceli, PowerPointe, Worde a Outlooku — analyzujte, píšte a upravujte priamo v otvorenom dokumente.</dd>
+    </dl>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Ktoré úlohy vo vašej práci by získali z partnera na myslenie? Prejdite si kalendár — alebo ešte lepšie, poproste o to Clauda — a vyberte niekoľko úloh, pri ktorých by vám Claude pomohol.</p></div>
+  </div>
+</section>
+<section class="sec" id="first-conversation" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 1.2</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Your first conversation with Claude</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Start a new conversation with Claude and navigate the interface</li>
+      <li>Write effective prompts using clear, specific language</li>
+      <li>Upload files and images to provide Claude with additional context</li>
+      <li>Use follow-up messages to iterate and refine Claude's responses</li>
+    </ul>
+
+    <h4>Key takeaways</h4>
+    <ul class="b">
+      <li>Claude amplifies your capabilities across all of your work. Claude brings AI intelligence; <b>you</b> bring the context and expertise that makes the work meaningful.</li>
+      <li>The best approach is to speak to Claude the way you would a coworker — naturally, concisely, conversationally.</li>
+      <li>Before your next conversation, consider <b>setting the stage</b> (role, objectives, context), <b>defining the task</b> (the action you want), and <b>specifying rules</b> (style, tone, examples).</li>
+      <li>When you upload relevant documents, Claude considers that content in its response — a shortcut to understanding what you need.</li>
+      <li>The real power comes from continued, frequent communication, not one-off prompts.</li>
+    </ul>
+
+    <h4>Writing effective prompts</h4>
+    <p>Every interaction begins with a prompt, and the prompt plus surrounding context shapes the response. Prompts range from a simple question — brainstorming code names for a feature — to a complex request to co-create files. Before your next conversation, consider three things:</p>
+    <dl class="d">
+      <dt>Setting the stage</dt><dd>What is your role and what are your objectives? Is there context about your work Claude should know?</dd>
+      <dt>Defining the task</dt><dd>What action do you want Claude to take — write, analyze, build, something else?</dd>
+      <dt>Specifying rules</dt><dd>What style or tone do you want? Are there examples you can attach to show what you're looking for?</dd>
+    </dl>
+
+    <h4>Putting it together</h4>
+    <blockquote>"I'm the marketing lead at an indie streaming startup, and we're preparing an investor pitch deck for Series A investors. Can you research the current state of the independent film streaming market and identify key trends, competitor positioning, and growth opportunities? Use current web research with citations and structure it as a professional report of up to 5 pages, with an executive summary, market analysis, competitive landscape, and growth opportunities."</blockquote>
+    <ul class="b">
+      <li><b>Setting the stage</b> — an investor pitch deck for a new indie streaming app: the context and objective.</li>
+      <li><b>Defining the task</b> — research the market, with the details that matter: trends, competitors, opportunities.</li>
+      <li><b>Specifying rules</b> — current web research with citations, structured as a professional report of a stated length.</li>
+    </ul>
+    <div class="note"><span class="k">Attribution</span>
+      <p>This framework is adapted from the <b>4D Framework for AI Fluency</b>, developed through research collaboration between Professor Rick Dakan (Ringling College of Art and Design) and Professor Joseph Feller (University College Cork). Its four competencies are Delegation, Description, Discernment, and Diligence.</p></div>
+
+    <h4>Adding context</h4>
+    <p>Uploads, connectors, and custom preferences all give Claude more context about your work. Claude analyzes both text and visual elements — images, charts, graphics — in PDFs and other documents. Supported types include PDF, DOCX, CSV, TXT, and common image formats like PNG and JPEG.</p>
+    <ul class="b">
+      <li>Upload a document and ask Claude to summarize the key points</li>
+      <li>Share an image and ask Claude to describe or analyze what it sees</li>
+      <li>Attach a spreadsheet and ask Claude to identify trends in the data</li>
+      <li>Upload code and ask Claude to explain how it works or find bugs</li>
+    </ul>
+    <p>Once uploaded, Claude parses the file automatically; it appears in the chat as an attachment you can then prompt about.</p>
+    <div class="note"><span class="k">Pro tip</span>
+      <p>For preferences you want in <em>every</em> response, go to Settings → General → "What personal preferences should Claude consider?"</p></div>
+
+    <h4>Iterating on Claude's responses</h4>
+    <p>Conversations are meant to be iterative. Chaining bite-sized prompts creates a dialogue you steer based on what Claude says. If the first response isn't right:</p>
+    <ul class="b">
+      <li><b>Ask follow-up questions.</b> "Can you expand on the second point?" or "That's helpful, but can you make it more concise?"</li>
+      <li><b>Provide feedback.</b> "This is good, but the tone is too formal. Can you make it more conversational?"</li>
+      <li><b>Redirect or restart.</b> "Actually, I was asking about X, not Y." Worst case, open a new chat to fully refresh the context.</li>
+    </ul>
+    <div class="note"><span class="k">Pro tip</span>
+      <p>Click the pencil icon on any of your own messages to edit and resubmit the prompt — useful when you want to refine the request rather than add a new one.</p></div>
+
+    <h4>Personalizing Claude</h4>
+    <div class="cards two">
+      <div class="card"><h5>Memory</h5><p>Saves key context from your conversations — role, preferences, past decisions, working style — so you don't repeat yourself in every new chat. Tell Claude you work in marketing at a B2B company and it carries that forward. Review, edit, or delete anything it remembers in Settings; memory syncs across devices.</p></div>
+      <div class="card"><h5>Styles</h5><p>Customize how Claude communicates. Choose a preset — concise, formal, explanatory — or create a custom style by describing exactly how you want Claude to write. Once set, it applies across all conversations automatically.</p></div>
+    </div>
+  </div>
+
+  <div class="sk">
+    <h3>Vaša prvá konverzácia s Claudom</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Začať novú konverzáciu a zorientovať sa v rozhraní</li>
+      <li>Napísať účinný prompt jasným a konkrétnym jazykom</li>
+      <li>Nahrať súbory a obrázky a dodať Claudovi ďalší kontext</li>
+      <li>Používať následné správy na iteráciu a doladenie odpovedí</li>
+    </ul>
+
+    <h4>Kľúčové body</h4>
+    <ul class="b">
+      <li>Claude zosilňuje vaše schopnosti v celej vašej práci. Claude prináša inteligenciu; <b>vy</b> prinášate kontext a odbornosť, ktoré dávajú práci zmysel.</li>
+      <li>Najlepšie je hovoriť s Claudom ako s kolegom — prirodzene, výstižne, konverzačne.</li>
+      <li>Pred ďalšou konverzáciou zvážte <b>nastavenie scény</b> (rola, ciele, kontext), <b>definovanie úlohy</b> (akú akciu chcete) a <b>určenie pravidiel</b> (štýl, tón, príklady).</li>
+      <li>Keď nahráte relevantné dokumenty, Claude ich zohľadní v odpovedi — je to skratka k pochopeniu vašich potrieb.</li>
+      <li>Skutočná sila prichádza z priebežnej a častej komunikácie, nie z jednorazových promptov.</li>
+    </ul>
+
+    <h4>Ako písať účinné prompty</h4>
+    <p>Každá interakcia začína promptom a prompt spolu s okolitým kontextom formuje odpoveď. Prompty môžu byť jednoduché otázky — napríklad hľadanie krycieho názvu pre novú funkciu — až po zložité požiadavky na spoločnú tvorbu súborov. Pred ďalšou konverzáciou zvážte tri veci:</p>
+    <dl class="d">
+      <dt>Nastavenie scény</dt><dd>Aká je vaša rola a aké sú vaše ciele? Je nejaký kontext o vašej práci, ktorý by mal Claude poznať?</dd>
+      <dt>Definovanie úlohy</dt><dd>Akú akciu má Claude vykonať — písať, analyzovať, postaviť, niečo iné?</dd>
+      <dt>Určenie pravidiel</dt><dd>Aký štýl alebo tón chcete? Máte príklady, ktoré môžete priložiť ako ukážku toho, čo hľadáte?</dd>
+    </dl>
+
+    <h4>Ako to spojiť dokopy</h4>
+    <blockquote>„Vediem marketing v startupe s nezávislým streamingom a pripravujeme investorskú prezentáciu pre Series A. Preskúmaj súčasný stav trhu streamingu nezávislého filmu a identifikuj kľúčové trendy, pozíciu konkurentov a možnosti rastu. Použi aktuálny webový výskum s citáciami a naštrukturuj to ako profesionálnu správu do 5 strán, s exekutívnym súhrnom, analýzou trhu, konkurenčným prostredím a možnosťami rastu.“</blockquote>
+    <ul class="b">
+      <li><b>Nastavenie scény</b> — investorská prezentácia pre novú streamovaciu aplikáciu: kontext a cieľ.</li>
+      <li><b>Definovanie úlohy</b> — preskúmať trh, s podstatnými detailmi: trendy, konkurenti, príležitosti.</li>
+      <li><b>Určenie pravidiel</b> — aktuálny webový výskum s citáciami, štruktúrovaný ako profesionálna správa s uvedenou dĺžkou.</li>
+    </ul>
+    <div class="note"><span class="k">Zdroj rámca</span>
+      <p>Tento rámec vychádza zo <b>4D Framework for AI Fluency</b>, ktorý vznikol vo výskumnej spolupráci profesora Ricka Dakana (Ringling College of Art and Design) a profesora Josepha Fellera (University College Cork). Jeho štyri kompetencie sú Delegation, Description, Discernment a Diligence.</p></div>
+
+    <h4>Pridávanie kontextu</h4>
+    <p>Nahrané súbory, konektory a vlastné preferencie dávajú Claudovi viac kontextu o vašej práci. Claude analyzuje textové aj vizuálne prvky — obrázky, grafy, grafiku — v PDF a ďalších dokumentoch. Podporované typy zahŕňajú PDF, DOCX, CSV, TXT a bežné obrázkové formáty ako PNG a JPEG.</p>
+    <ul class="b">
+      <li>Nahrajte dokument a požiadajte o súhrn kľúčových bodov</li>
+      <li>Zdieľajte obrázok a požiadajte o opis alebo analýzu toho, čo Claude vidí</li>
+      <li>Priložte tabuľku a požiadajte o identifikáciu trendov v dátach</li>
+      <li>Nahrajte kód a požiadajte o vysvetlenie fungovania alebo nájdenie chýb</li>
+    </ul>
+    <p>Po nahraní Claude obsah súboru automaticky spracuje; v chate sa zobrazí ako príloha, na ktorú sa potom môžete pýtať.</p>
+    <div class="note"><span class="k">Tip</span>
+      <p>Ak chcete, aby Claude zohľadňoval určité preferencie v <em>každej</em> odpovedi, prejdite do Settings → General → „What personal preferences should Claude consider?“</p></div>
+
+    <h4>Iterácia odpovedí</h4>
+    <p>Konverzácie s Claudom majú byť iteratívne. Zreťazenie menších promptov vytvára dialóg, ktorý usmerňujete podľa Claudových odpovedí. Ak prvá odpoveď nie je presne tá, ktorú chcete:</p>
+    <ul class="b">
+      <li><b>Pýtajte sa ďalej.</b> „Môžeš rozviesť druhý bod?“ alebo „Toto pomáha, ale daj to výstižnejšie.“</li>
+      <li><b>Dajte spätnú väzbu.</b> „Je to dobré, ale tón je príliš formálny. Sprav to konverzačnejšie.“</li>
+      <li><b>Presmerujte alebo začnite odznova.</b> „Vlastne som sa pýtal na X, nie na Y.“ V najhoršom prípade otvorte nový chat a kontext úplne osviežte.</li>
+    </ul>
+    <div class="note"><span class="k">Tip</span>
+      <p>Kliknutím na ikonu ceruzky pri vlastnej správe ju môžete upraviť a poslať znova — užitočné, keď chcete požiadavku doladiť namiesto pridania novej.</p></div>
+
+    <h4>Personalizácia Clauda</h4>
+    <div class="cards two">
+      <div class="card"><h5>Memory</h5><p>Ukladá kľúčový kontext z konverzácií — vašu rolu, preferencie, minulé rozhodnutia, pracovný štýl — takže sa v každom novom chate nemusíte opakovať. Keď Claudovi poviete, že pracujete v marketingu B2B firmy, ponesie si to ďalej. Čokoľvek si pamätá si viete prezrieť, upraviť alebo zmazať v Settings; pamäť sa synchronizuje medzi zariadeniami.</p></div>
+      <div class="card"><h5>Styles</h5><p>Prispôsobenie toho, ako Claude komunikuje. Vyberte predvoľbu — výstižný, formálny, vysvetľujúci — alebo si vytvorte vlastný štýl opisom toho, ako presne má Claude písať. Po nastavení sa uplatní automaticky vo všetkých konverzáciách.</p></div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="better-results" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 1.3</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Getting better results</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Recognize common challenges when starting out with AI and use troubleshooting techniques to overcome them</li>
+      <li>Define AI Fluency and know where to go to learn more about working with AI in a fluent way</li>
+      <li>Explain how you might set up evals to better understand how Claude might perform with your unique workflows</li>
+    </ul>
+
+    <h4>Common challenges and how to fix them</h4>
+    <p>As you start working with Claude, you'll likely encounter moments where the response isn't quite what you expected. This is normal — and it's an opportunity to refine your approach.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Challenge</th><th>What's happening</th><th>Try this</th></tr></thead>
+      <tbody>
+        <tr><td>Claude's response is too generic</td><td>Your prompt didn't include enough context about your specific situation</td><td>Add details about your audience, role, or constraints. Instead of "Write an email about the project delay," try "Write an email to our enterprise client explaining that the software integration will be delayed by two weeks. They've been patient so far but this is the second delay. Keep it professional but apologetic."</td></tr>
+        <tr><td>The response is too long (or too short)</td><td>Claude is guessing at appropriate length</td><td>Be explicit: "Give me a two-paragraph summary" or "Keep this under 100 words" or "I need a comprehensive analysis — length isn't a concern."</td></tr>
+        <tr><td>Claude didn't follow my format</td><td>Claude understood <em>what</em> you want but not <em>how</em> you want it presented</td><td>Show, don't just tell. Provide an example of the format, or describe the structure explicitly: "Use bullet points with bold headers for each section."</td></tr>
+        <tr><td>I got confident-sounding information that turned out to be wrong</td><td>Claude occasionally generates plausible but incorrect information, especially with specific facts or niche topics</td><td>For high-stakes work, verify key facts independently. Ask Claude to cite sources or indicate confidence level. Enable web search to ground responses in current information.</td></tr>
+        <tr><td>The tone isn't right</td><td>Claude defaults to helpful and professional, which may not match your needs</td><td>Describe the tone in plain language: "Make this more conversational" or "This should sound authoritative and formal." Provide an example of writing in the style you want.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>The iteration mindset</h4>
+    <p>One of the most important shifts when working with Claude is recognizing that your first prompt rarely produces a perfect result — and that's okay. Think of your initial prompt as the start of a conversation, not a one-shot request. Effective Claude users:</p>
+    <ul class="b">
+      <li>Treat first drafts as starting points. Review what Claude produces, identify what's working and what isn't, then refine.</li>
+      <li>Give specific feedback. "Make it shorter" is fine, but "Cut the first two paragraphs and make the conclusion more action-oriented" is better.</li>
+      <li>Know when to start fresh. If a conversation has gone off track, sometimes it's faster to open a new chat with a clearer prompt than to try to redirect.</li>
+    </ul>
+
+    <h4>What is AI Fluency?</h4>
+    <p>AI Fluency is the ability to collaborate effectively with AI tools — not just knowing which buttons to click, but developing the judgment to use AI well across different situations. The <b>4D Framework for AI Fluency</b>, developed through research collaboration between Professor Rick Dakan (Ringling College of Art and Design) and Professor Joseph Feller (University College Cork), identifies four core competencies:</p>
+    <dl class="d">
+      <dt>Delegation</dt><dd>Deciding what work should be done by humans, what should be done by AI, and how to distribute tasks between them.</dd>
+      <dt>Description</dt><dd>Effectively communicating with AI systems — clearly defining outputs, guiding AI processes, specifying desired behaviors.</dd>
+      <dt>Discernment</dt><dd>Thoughtfully and critically evaluating AI outputs, processes, and behaviors — assessing quality, accuracy, and appropriateness.</dd>
+      <dt>Diligence</dt><dd>Using AI responsibly and ethically — maintaining transparency and taking accountability for AI-assisted work.</dd>
+    </dl>
+    <p>You've already been practicing these skills. The prompt framework from the previous lesson (setting the stage, defining the task, specifying rules) is rooted in Description. The troubleshooting techniques above draw on Discernment and Diligence.</p>
+
+    <h4>Evaluating Claude for your workflows</h4>
+    <p>As you integrate Claude into more of your work, you might wonder: how do I know if Claude is actually good at this particular task? This is where Discernment becomes essential. Evals (short for evaluations) are systematic ways to test how well Claude performs on specific types of tasks that matter to you. Running simple evals helps you:</p>
+    <ul class="b">
+      <li>Understand where Claude adds the most value in your workflow</li>
+      <li>Identify tasks where you'll need to provide more context or examples</li>
+      <li>Build confidence in Claude's outputs for recurring tasks</li>
+    </ul>
+    <p>A simple eval approach, no complex infrastructure required:</p>
+    <ul class="b">
+      <li><b>Gather examples.</b> Collect 5–10 examples of a task you do regularly — emails, reports, analyses.</li>
+      <li><b>Create test prompts.</b> Write prompts that would generate similar outputs, including the context you'd naturally have.</li>
+      <li><b>Compare outputs.</b> Does Claude capture the key information? Is the tone appropriate? What's missing?</li>
+      <li><b>Refine your approach.</b> Adjust prompts, add examples of what good looks like, or identify where human review is essential.</li>
+    </ul>
+    <p>To evaluate how Claude might work with your data: find a dataset you've manually analyzed, create prompts requesting the same analysis, compare Claude's results to your originals, and note patterns — maybe Claude gets the right numbers but misses the overall pattern.</p>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Which of the common challenges have you already encountered? Where in your work would a simple eval help you understand if Claude is a good fit for a recurring task? How might the 4D Framework help you think about your collaboration with Claude?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Ako dosiahnuť lepšie výsledky</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Rozpoznať bežné problémy pri práci s AI a použiť techniky na ich riešenie</li>
+      <li>Definovať AI Fluency a vedieť, kde sa dozvedieť viac o zdatnej práci s AI</li>
+      <li>Vysvetliť, ako nastaviť evaluácie na lepšie pochopenie toho, ako sa Claude osvedčí vo vašich workflowoch</li>
+    </ul>
+
+    <h4>Bežné problémy a ako ich riešiť</h4>
+    <p>Pri práci s Claudom sa občas stretnete s momentmi, keď odpoveď nie je presne taká, akú ste čakali. To je normálne — a je to príležitosť doladiť svoj prístup.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Problém</th><th>Čo sa deje</th><th>Skúste toto</th></tr></thead>
+      <tbody>
+        <tr><td>Odpoveď Clauda je príliš všeobecná</td><td>Váš prompt neobsahoval dosť kontextu o vašej konkrétnej situácii</td><td>Pridajte detaily o publiku, role alebo obmedzeniach. Namiesto „Napíš email o zdržaní projektu“ skúste „Napíš email nášmu enterprise klientovi vysvetľujúci, že integrácia softvéru sa oneskorí o dva týždne. Doteraz boli trpezliví, ale toto je už druhé oneskorenie. Udrž to profesionálne, ale ospravedlňujúce.“</td></tr>
+        <tr><td>Odpoveď je príliš dlhá (alebo krátka)</td><td>Claude odhaduje vhodnú dĺžku</td><td>Buďte explicitní: „Daj mi dvojodstavcový súhrn“ alebo „Udrž to pod 100 slov“ alebo „Potrebujem komplexnú analýzu — dĺžka nie je problém.“</td></tr>
+        <tr><td>Claude nedodržal môj formát</td><td>Claude pochopil <em>čo</em> chcete, ale nie <em>ako</em> to má byť prezentované</td><td>Ukážte, nielen povedzte. Priložte príklad formátu alebo popíšte štruktúru explicitne: „Použi odrážky s tučnými nadpismi pre každú sekciu.“</td></tr>
+        <tr><td>Dostal som sebavedomo znejúcu informáciu, ktorá sa ukázala ako nesprávna</td><td>Claude občas generuje vierohodné, ale nesprávne informácie, najmä pri špecifických faktoch alebo okrajových témach</td><td>Pri dôležitej práci si kľúčové fakty overte nezávisle. Požiadajte Clauda o citácie zdrojov alebo mieru istoty. Zapnite webové vyhľadávanie pre aktuálne informácie.</td></tr>
+        <tr><td>Tón nesedí</td><td>Claude defaultne používa pomocný a profesionálny tón, čo nemusí vyhovovať</td><td>Opíšte tón jasne: „Sprav to konverzačnejšie“ alebo „Toto by malo znieť autoritatívne a formálne.“ Priložte príklad štýlu, ktorý chcete.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Postoj iterácie</h4>
+    <p>Jeden z najdôležitejších posunov pri práci s Claudom je uvedomiť si, že prvý prompt zriedka prinesie dokonalý výsledok — a to je v poriadku. Berte prvý prompt ako začiatok konverzácie, nie jednorazovú požiadavku. Efektívni používatelia Clauda:</p>
+    <ul class="b">
+      <li>Berú prvé návrhy ako východiskový bod. Prezrú, čo Claude vytvoril, identifikujú, čo funguje a čo nie, a doladia.</li>
+      <li>Dávajú konkrétnu spätnú väzbu. „Skráť to“ je fajn, ale „Vystrihni prvé dva odseky a záver sprav akčnejší“ je lepšie.</li>
+      <li>Vedia, kedy začať odznova. Ak sa konverzácia vychýlila, niekedy je rýchlejšie otvoriť nový chat s jasnejším promptom než sa snažiť ju presmerovať.</li>
+    </ul>
+
+    <h4>Čo je AI Fluency?</h4>
+    <p>AI Fluency je schopnosť efektívne spolupracovať s AI nástrojmi — nielen vedieť, na čo kliknúť, ale rozvinúť úsudok na dobré použitie AI v rôznych situáciách. <b>4D Framework for AI Fluency</b>, vyvinutý výskumnou spoluprácou profesora Ricka Dakana (Ringling College of Art and Design) a profesora Josepha Fellera (University College Cork), identifikuje štyri kľúčové kompetencie:</p>
+    <dl class="d">
+      <dt>Delegation</dt><dd>Rozhodovanie o tom, akú prácu má robiť človek a akú AI, a ako úlohy medzi nich rozdeliť.</dd>
+      <dt>Description</dt><dd>Efektívna komunikácia s AI systémami — jasné definovanie výstupov, usmerňovanie procesov AI, špecifikovanie požadovaného správania.</dd>
+      <dt>Discernment</dt><dd>Premyslené a kritické hodnotenie výstupov, procesov a správania AI — posudzovanie kvality, presnosti a vhodnosti.</dd>
+      <dt>Diligence</dt><dd>Zodpovedné a etické používanie AI — udržiavanie transparentnosti a zodpovednosti za prácu vytvorenú s AI.</dd>
+    </dl>
+    <p>Tieto zručnosti ste už precvičovali. Rámec promptu z predchádzajúcej lekcie (nastavenie scény, definovanie úlohy, určenie pravidiel) vychádza z Description. Techniky riešenia problémov vyššie vychádzajú z Discernment a Diligence.</p>
+
+    <h4>Hodnotenie Clauda pre vaše workflowy</h4>
+    <p>Ako Clauda integrujete do viacerej práce, môžete sa pýtať: ako viem, že je Claude naozaj dobrý v tejto konkrétnej úlohe? Tu nastupuje Discernment. Evaluácie (evals) sú systematické spôsoby testovania, ako dobre Claude zvláda konkrétne typy úloh, na ktorých vám záleží. Jednoduché evaluácie vám pomôžu:</p>
+    <ul class="b">
+      <li>Pochopiť, kde Claude prináša najviac hodnoty vo vašom workflowe</li>
+      <li>Identifikovať úlohy, pri ktorých budete musieť dodať viac kontextu alebo príkladov</li>
+      <li>Vybudovať si dôveru vo výstupy Clauda pre opakujúce sa úlohy</li>
+    </ul>
+    <p>Jednoduchý prístup k evaluácii, bez zložitej infraštruktúry:</p>
+    <ul class="b">
+      <li><b>Zozbierajte príklady.</b> Zoberte 5 – 10 príkladov úlohy, ktorú robíte pravidelne — emaily, správy, analýzy.</li>
+      <li><b>Vytvorte testovacie prompty.</b> Napíšte prompty, ktoré by vygenerovali podobné výstupy, vrátane bežného kontextu.</li>
+      <li><b>Porovnajte výstupy.</b> Zachytáva Claude kľúčové informácie? Je tón vhodný? Čo chýba?</li>
+      <li><b>Doladte prístup.</b> Upravte prompty, pridajte príklady toho, ako vyzerá dobrý výsledok, alebo určte, kde je nutná ľudská kontrola.</li>
+    </ul>
+    <p>Na vyhodnotenie práce s vašimi dátami: nájdite dataset, ktorý ste manuálne analyzovali, vytvorte prompty požadujúce rovnakú analýzu, porovnajte výsledky Clauda s vašimi originálmi a všímajte si vzory — možno má Claude správne čísla, ale unikajú mu celkové trendy.</p>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>S ktorými bežnými problémami ste sa už stretli? Kde vo vašej práci by vám jednoduchá evaluácia pomohla pochopiť, či je Claude vhodný na opakujúcu sa úlohu? Ako by vám mohol 4D Framework pomôcť premýšľať o spolupráci s Claudom?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="desktop-shapes" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 1.4</span>
+    <span class="time">6 min</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>How you'll work with Claude on your desktop</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Distinguish the ways you work with Claude on the desktop — turn by turn, handing whole tasks off, and building software in your codebase</li>
+      <li>Recognize which shape of work a task calls for before you start it</li>
+      <li>Find where each way of working lives in the desktop app today</li>
+    </ul>
+
+    <h4>Three shapes of work</h4>
+    <p>The Claude desktop app is your home base for working with Claude — from a quick question mid-meeting to a report Claude assembles from six sources while you do something else. The work sorts into three shapes, and knowing which one you're in is the whole skill of this lesson:</p>
+    <ul class="b">
+      <li><b>Working with Claude, turn by turn.</b> You and Claude go back and forth. You ask, Claude answers, you steer, it revises. The thinking happens in the exchange.</li>
+      <li><b>Handing work off to Claude.</b> You describe an outcome — a finished brief, a formatted deliverable, a task that runs every Monday — and Claude plans it, does it, and comes back with the result.</li>
+      <li><b>Building software with Claude Code.</b> Claude works directly in a codebase: reading it, writing and testing code, running commands. Built for developers, worth knowing about even if you never open it.</li>
+    </ul>
+    <p>The first two are where most knowledge workers spend their day; the third is the developer's workspace.</p>
+    <div class="note"><span class="k">In the product today</span>
+      <p>Turn-by-turn work happens in Chat. Work you hand off runs in Cowork. Building software happens in the Code tab. All three live in the Claude desktop app.</p></div>
+
+    <h4>Working with Claude, turn by turn</h4>
+    <p>This is Claude as a thinking partner: the shape of work where the value is in the exchange itself. Reach for this when the answer changes what you ask next, when you want to stay in it — drafting, editing, thinking out loud — or when it's quick enough that setting up a whole task would be overhead.</p>
+    <p>Try it when you're staring at an unfamiliar dashboard and screenshot it to ask what the metrics mean; when you're between meetings and talk through a presentation outline by voice; or when you've been jotting product-launch ideas across notes for weeks and want Claude to pull it together and find the gaps.</p>
+    <div class="note"><span class="k">In the product today</span>
+      <p>This is Chat — the same Claude you know from claude.ai, plus quick entry (double-tap Option on Mac), screenshots and window sharing, dictation, and desktop connectors to local tools and services.</p></div>
+
+    <h4>Handing work off to Claude</h4>
+    <p>Instead of asking a question, you hand Claude the whole piece of work — gather the context, do the analysis, produce the finished thing — and it comes back done. Reach for this when the task has several steps you'd normally do in sequence, when the output is a real deliverable, when the work spans your tools, or when it should happen on a schedule or while you're doing something else.</p>
+    <p>Handing work off doesn't mean stepping back from it: Claude may ask a few questions to pin down scope and format, shows you the plan, and lets you watch the task take shape and steer at any point. When set to ask before acting, it stops for your approval on actions that matter, like sending an email or sharing a file.</p>
+    <p>Try it when you want to query all your tools like a database ("review what we decided about pricing last quarter across notes, Slack, and email, then update the deck"); when you have 50+ project documents and want the ones most relevant to your initiative summarized; or when you do the same Monday-morning routine every week and want it running before you sit down.</p>
+    <div class="note"><span class="k">In the product today</span>
+      <p>This is Cowork: local folder access (read and save back to the same folder), scheduled tasks, subagents that split a big job across background workers, projects built around the tasks you run, browser use, computer use (research preview, Pro/Max), and plugins. Available to Pro, Max, Team, and Enterprise users.</p></div>
+
+    <h4>Building software with Claude Code</h4>
+    <p>If you write code, the desktop app gives you a full development environment: Claude reads what's in your codebase, writes and modifies code, and runs commands. Visual diffs show what changed, a built-in terminal shows commands as they run, and git tracks every version so you can always roll back. If you're not a developer, the takeaway is simple: it's a separate tab, and this course doesn't need it.</p>
+    <p>You choose where the work happens — <b>Local</b> (a folder on your computer, with a preview server in your browser) or <b>Cloud</b> (a connected GitHub repository, sessions continuing even if you close the app) — and how much Claude does on its own: manually approve every change, accept edits automatically, or plan before making changes.</p>
+    <div class="note"><span class="k">In the product today</span>
+      <p>This lives in the Code tab, available on Pro, Max, Team, and Enterprise plans. You can run multiple sessions across projects and filter them by environment and status.</p></div>
+
+    <h4>Choosing the right shape for the task</h4>
+    <div class="tw"><table>
+      <thead><tr><th>You're about to…</th><th>The shape it takes</th><th>Where it lives today</th></tr></thead>
+      <tbody>
+        <tr><td>Ask, brainstorm, draft, or think something through, turn by turn</td><td>Working with Claude, turn by turn</td><td>Chat (quick entry, dictation, screenshots)</td></tr>
+        <tr><td>Hand off a multi-step task that ends in a finished deliverable, spans your tools, or runs on a schedule</td><td>Handing work off</td><td>Cowork (folder access, connectors, scheduled tasks, subagents)</td></tr>
+        <tr><td>Write, test, run, and ship code in a codebase</td><td>Building software</td><td>The Code tab (Local or Cloud)</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Think about how you used Claude this week. Which requests were turn-by-turn thinking, and which were really whole tasks you fed in one question at a time because that's the habit? Take the task you'd most like off your plate — is it multi-step, does it end in a real file, does it span your tools? If yes to any, it's a hand-off.</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Ako budete pracovať s Claudom na desktope</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Rozlíšiť spôsoby práce s Claudom na desktope — postupne v dialógu, odovzdaním celej úlohy a stavaním softvéru v repozitári</li>
+      <li>Rozpoznať, akú podobu práce úloha vyžaduje ešte pred jej začatím</li>
+      <li>Nájsť, kde v desktopovej aplikácii dnes každý spôsob práce žije</li>
+    </ul>
+
+    <h4>Tri podoby práce</h4>
+    <p>Desktopová aplikácia Claude je vaša základňa pre prácu s Claudom — od rýchlej otázky uprostred porady až po správu, ktorú Claude zloží zo šiestich zdrojov, kým robíte niečo iné. Práca sa delí na tri podoby a vedieť, v ktorej práve ste, je celá zručnosť tejto lekcie:</p>
+    <ul class="b">
+      <li><b>Práca s Claudom postupne, ťah za ťahom.</b> Vy a Claude si vymieňate správy. Pýtate sa, Claude odpovedá, usmerňujete, on prepracuje. Myslenie prebieha v samotnej výmene.</li>
+      <li><b>Odovzdanie práce Claudovi.</b> Opíšete výsledok — hotový brief, formátovaný výstup, úlohu bežiacu každý pondelok — a Claude ju naplánuje, vykoná a vráti sa s výsledkom.</li>
+      <li><b>Stavanie softvéru s Claude Code.</b> Claude pracuje priamo v repozitári: číta ho, píše a testuje kód, spúšťa príkazy. Určené pre vývojárov, ale užitočné vedieť o tom, aj keď to nikdy neotvoríte.</li>
+    </ul>
+    <p>Prvé dve sú tam, kde väčšina znalostných pracovníkov trávi deň; tretie je pracovný priestor vývojára.</p>
+    <div class="note"><span class="k">V produkte dnes</span>
+      <p>Práca ťah za ťahom prebieha v Chat. Odovzdaná práca beží v Cowork. Stavanie softvéru prebieha v karte Code. Všetky tri žijú v desktopovej aplikácii Claude.</p></div>
+
+    <h4>Práca s Claudom postupne, ťah za ťahom</h4>
+    <p>Toto je Claude ako partner na premýšľanie: podoba práce, kde hodnota je v samotnej výmene. Siahnite po nej, keď odpoveď mení to, na čo sa spýtate ďalej, keď chcete zostať „v tom“ — písanie, editovanie, nahlas rozmýšľanie — alebo keď je to natoľko rýchle, že vytvárať celú úlohu by bola zbytočná réžia.</p>
+    <p>Vyskúšajte to, keď hľadíte na neznámy dashboard a odfotíte ho s otázkou, čo metriky znamenajú; keď ste medzi poradami a nahlas prechádzate osnovu prezentácie; alebo keď ste týždne zapisovali nápady na launch produktu do poznámok a chcete, aby ich Claude poskladal a našiel medzery.</p>
+    <div class="note"><span class="k">V produkte dnes</span>
+      <p>Toto je Chat — rovnaký Claude, akého poznáte z claude.ai, plus rýchly vstup (dvojité ťuknutie na Option na Macu), snímky obrazovky a zdieľanie okien, diktovanie a desktopové konektory na lokálne nástroje a služby.</p></div>
+
+    <h4>Odovzdanie práce Claudovi</h4>
+    <p>Namiesto otázky odovzdáte Claudovi celý kus práce — zozbieranie kontextu, analýzu, vytvorenie hotovej veci — a on sa vráti s hotovým výsledkom. Siahnite po tom, keď má úloha viacero krokov, ktoré by ste normálne robili postupne, keď je výstupom skutočný dokument, keď práca presahuje viaceré vaše nástroje, alebo keď sa má diať podľa harmonogramu či popri inej práci.</p>
+    <p>Odovzdanie práce neznamená odstúpiť od nej: Claude sa môže najprv opýtať na rozsah a formát, ukáže vám plán, a môžete sledovať, ako sa úloha formuje, a kedykoľvek zasiahnuť. Keď je nastavený, aby sa pýtal pred konaním, zastaví sa a čaká na váš súhlas pri dôležitých akciách, ako je odoslanie emailu alebo zdieľanie súboru.</p>
+    <p>Vyskúšajte to, keď chcete klásť dotazy naprieč všetkými nástrojmi ako do databázy („skontroluj, čo sme sa minulý štvrťrok dohodli o cenách naprieč poznámkami, Slackom a emailom, a aktualizuj podľa toho prezentáciu“); keď máte 50+ projektových dokumentov a chcete zhrnutie tých najrelevantnejších; alebo keď každý pondelok robíte rovnakú rutinu a chcete, aby bežala skôr, než si sadnete k počítaču.</p>
+    <div class="note"><span class="k">V produkte dnes</span>
+      <p>Toto je Cowork: prístup k lokálnemu priečinku (čítanie a ukladanie do rovnakého priečinka), naplánované úlohy, subagenti rozdeľujúci veľkú úlohu medzi paralelných pracovníkov na pozadí, projekty postavené okolo úloh, ktoré spúšťate, prehliadanie webu, ovládanie počítača (výskumný náhľad, Pro/Max) a pluginy. Dostupné pre Pro, Max, Team a Enterprise.</p></div>
+
+    <h4>Stavanie softvéru s Claude Code</h4>
+    <p>Ak píšete kód, desktopová aplikácia vám dáva plnohodnotné vývojové prostredie: Claude číta, čo je vo vašom repozitári, píše a upravuje kód a spúšťa príkazy. Vizuálne diffy ukazujú, čo sa zmenilo, vstavaný terminál zobrazuje bežiace príkazy a git sleduje každú verziu, takže sa vždy môžete vrátiť späť. Ak nie ste vývojár, záver je jednoduchý: je to samostatná karta a tento kurz ju nepotrebuje.</p>
+    <p>Vyberáte si, kde práca prebieha — <b>lokálne</b> (priečinok na počítači, s náhľadovým serverom v prehliadači) alebo v <b>cloude</b> (pripojený GitHub repozitár, relácie pokračujú aj po zavretí aplikácie) — a koľko toho Claude robí sám: manuálne schvaľovať každú zmenu, prijímať úpravy automaticky, alebo najprv vytvoriť plán.</p>
+    <div class="note"><span class="k">V produkte dnes</span>
+      <p>Toto žije v karte Code, dostupnej na plánoch Pro, Max, Team a Enterprise. Môžete spustiť viacero relácií naprieč projektmi a filtrovať ich podľa prostredia a stavu.</p></div>
+
+    <h4>Výber správnej podoby pre úlohu</h4>
+    <div class="tw"><table>
+      <thead><tr><th>Chystáte sa…</th><th>Podoba práce</th><th>Kde to dnes žije</th></tr></thead>
+      <tbody>
+        <tr><td>Pýtať sa, brainstormovať, písať návrh alebo niečo premýšľať, postupne</td><td>Práca s Claudom ťah za ťahom</td><td>Chat (rýchly vstup, diktovanie, snímky obrazovky)</td></tr>
+        <tr><td>Odovzdať viac­krokovú úlohu končiacu hotovým výstupom, presahujúcu vaše nástroje alebo bežiacu podľa harmonogramu</td><td>Odovzdanie práce</td><td>Cowork (prístup k priečinku, konektory, naplánované úlohy, subagenti)</td></tr>
+        <tr><td>Písať, testovať, spúšťať a nasadzovať kód v repozitári</td><td>Stavanie softvéru</td><td>Karta Code (Local alebo Cloud)</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Zamyslite sa, ako ste tento týždeň používali Clauda. Ktoré požiadavky boli premýšľanie ťah za ťahom a ktoré boli v skutočnosti celé úlohy, ktoré ste zadávali po jednej otázke, lebo je to zvyk? Vezmite úlohu, ktorú by ste najradšej odovzdali — je viac­kroková, končí skutočným súborom, presahuje vaše nástroje? Ak áno na čokoľvek z toho, je to odovzdanie práce.</p></div>
+  </div>
+</section>
+<div class="mod">
+  <div class="mod-head"><span class="num">Module 02</span><h2>Organizing your work and knowledge</h2></div>
+</div>
+
+<section class="sec" id="projects" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 2.1</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Introduction to projects</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what a project is and why it helps organize ongoing work</li>
+      <li>Set up a project with instructions and knowledge that Claude can draw on automatically</li>
+      <li>Recognize when a project is the right container for a piece of work, versus a one-off chat</li>
+    </ul>
+
+    <h4>What is a project?</h4>
+    <p>A project is a dedicated workspace that keeps everything related to one ongoing effort together — conversations, files, and instructions — so you don't have to re-explain the context every time you start a new chat. Every conversation you have inside a project can see the same shared knowledge, which means Claude already knows the background before you ask the first question.</p>
+    <p>Think of a project as the folder you'd create for a piece of work anyway — a client account, a quarterly report, a product launch — except Claude actually reads what's inside it.</p>
+
+    <h4>What goes into a project</h4>
+    <dl class="d">
+      <dt>Custom instructions</dt><dd>Standing guidance for how Claude should behave inside this project — tone, format preferences, things to always check, a house style. Set once, applied to every conversation in the project.</dd>
+      <dt>Project knowledge</dt><dd>Files you upload — briefs, style guides, past reports, spreadsheets, transcripts — that Claude treats as background it already knows, without you re-attaching them each time.</dd>
+      <dt>Conversations</dt><dd>Every chat started inside the project lives there, so earlier threads on the same effort stay findable and connected instead of scattering across your history.</dd>
+    </dl>
+
+    <h4>When to reach for a project</h4>
+    <p>Start a project when the work is ongoing rather than a single question — anything you'll come back to across multiple sessions, with a stable set of background material. A few signs it's time:</p>
+    <ul class="b">
+      <li>You catch yourself re-pasting the same background information into new chats</li>
+      <li>Several people on a team need to work from the same shared context</li>
+      <li>The work has its own reference material — a style guide, a dataset, past decisions — that should inform every conversation about it</li>
+      <li>You expect to return to this work over days or weeks, not just today</li>
+    </ul>
+    <p>For a one-off question or a task with no ongoing context to preserve, a regular chat is simpler — there's no need to set up a project for something you'll only ask once.</p>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Think of a piece of work you return to repeatedly — a recurring report, a client relationship, a long-running project. What custom instructions would you give Claude for it? What two or three files would you drop in as project knowledge?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Úvod do projektov</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je projekt a prečo pomáha organizovať prebiehajúcu prácu</li>
+      <li>Nastaviť projekt s inštrukciami a znalosťami, z ktorých Claude automaticky čerpá</li>
+      <li>Rozpoznať, kedy je projekt správnym kontajnerom pre prácu, oproti jednorazovému chatu</li>
+    </ul>
+
+    <h4>Čo je projekt?</h4>
+    <p>Projekt je vyhradený pracovný priestor, ktorý drží pohromade všetko súvisiace s jedným prebiehajúcim úsilím — konverzácie, súbory a inštrukcie — takže nemusíte pri každom novom chate znova vysvetľovať kontext. Každá konverzácia vnútri projektu vidí rovnaké zdieľané znalosti, takže Claude pozná pozadie ešte pred vašou prvou otázkou.</p>
+    <p>Predstavte si projekt ako priečinok, ktorý by ste na danú prácu aj tak vytvorili — účet klienta, štvrťročná správa, launch produktu — s tým rozdielom, že Claude si skutočne prečíta, čo je v ňom.</p>
+
+    <h4>Čo patrí do projektu</h4>
+    <dl class="d">
+      <dt>Vlastné inštrukcie</dt><dd>Stále usmernenie pre správanie Clauda v tomto projekte — tón, preferencie formátu, veci, ktoré má vždy skontrolovať, firemný štýl. Nastavené raz, platí pre každú konverzáciu v projekte.</dd>
+      <dt>Znalosti projektu</dt><dd>Súbory, ktoré nahráte — briefy, štýlové príručky, staršie správy, tabuľky, prepisy — ktoré Claude berie ako pozadie, ktoré už pozná, bez toho, aby ste ich museli znova prikladať.</dd>
+      <dt>Konverzácie</dt><dd>Každý chat začatý v projekte tam zostáva, takže staršie vlákna o rovnakej téme ostávajú nájditeľné a prepojené namiesto rozptýlenia po celej histórii.</dd>
+    </dl>
+
+    <h4>Kedy siahnuť po projekte</h4>
+    <p>Založte projekt, keď je práca prebiehajúca, nie jednorazová otázka — čokoľvek, k čomu sa vrátite naprieč viacerými reláciami, so stabilnou sadou podkladov. Niekoľko signálov, že je čas:</p>
+    <ul class="b">
+      <li>Prichytíte sa, ako opakovane vkladáte rovnaké pozadie do nových chatov</li>
+      <li>Viacero ľudí v tíme potrebuje pracovať z rovnakého zdieľaného kontextu</li>
+      <li>Práca má vlastné referenčné materiály — štýlovú príručku, dataset, staršie rozhodnutia — ktoré by mali informovať každú konverzáciu o nej</li>
+      <li>Očakávate, že sa k tejto práci vrátite počas dní alebo týždňov, nie len dnes</li>
+    </ul>
+    <p>Pre jednorazovú otázku alebo úlohu bez prebiehajúceho kontextu na zachovanie je jednoduchší bežný chat — netreba zakladať projekt pre niečo, na čo sa spýtate len raz.</p>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Spomeňte si na prácu, ku ktorej sa opakovane vraciate — pravidelná správa, vzťah s klientom, dlhodobý projekt. Aké vlastné inštrukcie by ste pre ňu dali Claudovi? Ktoré dva-tri súbory by ste vložili ako znalosti projektu?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="artifacts" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 2.2</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Creating with artifacts</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what an artifact is and how it differs from a regular chat reply</li>
+      <li>Recognize the kinds of content that work well as artifacts</li>
+      <li>Iterate on an artifact and share it once it's ready</li>
+    </ul>
+
+    <h4>What is an artifact?</h4>
+    <p>An artifact is a substantial, standalone piece of content that Claude creates alongside the conversation, in its own panel — a document, a piece of code, a diagram, a spreadsheet, a small interactive app. Instead of scrolling back through chat history to find the current version of what you're working on, the artifact sits in its own space, and Claude updates it in place as you iterate.</p>
+    <p>The distinction that matters: if what Claude produces is meant to be read once as part of the answer, it stays in the chat. If it's something you'll keep, edit, reuse, or share as a standalone piece of work, it becomes an artifact.</p>
+
+    <h4>What works well as an artifact</h4>
+    <ul class="b">
+      <li><b>Documents</b> — reports, briefs, plans, structured write-ups you'll keep and revise</li>
+      <li><b>Code</b> — scripts, components, or small tools, especially anything you'll run or reuse</li>
+      <li><b>Visuals</b> — diagrams, charts, and simple interactive interfaces built from real content</li>
+      <li><b>Structured data</b> — tables and spreadsheet-style content you'll want to keep referencing</li>
+    </ul>
+
+    <h4>Iterating on an artifact</h4>
+    <p>Once an artifact exists, you keep working on it the same way you'd keep working with Claude turn by turn: ask for a section rewritten, a chart restyled, a function fixed. Claude updates the artifact in place rather than starting over, and earlier versions stay available if you want to go back.</p>
+    <div class="note"><span class="k">Pro tip</span>
+      <p>Be specific about what should change and what should stay the same — "keep the structure, just tighten the introduction" gets a cleaner result than "make it better."</p></div>
+
+    <h4>Sharing an artifact</h4>
+    <p>A finished artifact can be shared as a link, so someone without a Claude account can open and view it directly — useful for a report you want a colleague to read, or a small tool you want someone else to try, without exporting files back and forth.</p>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Think back to something Claude produced for you recently that you ended up copying out of the chat to use elsewhere. Would that have worked better as an artifact from the start?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Vytváranie pomocou artefaktov</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je artefakt a čím sa líši od bežnej odpovede v chate</li>
+      <li>Rozpoznať typy obsahu, ktoré sa ako artefakty hodia</li>
+      <li>Iterovať na artefakte a zdieľať ho, keď je hotový</li>
+    </ul>
+
+    <h4>Čo je artefakt?</h4>
+    <p>Artefakt je podstatný, samostatný kus obsahu, ktorý Claude vytvára popri konverzácii, vo vlastnom paneli — dokument, kus kódu, diagram, tabuľka, malá interaktívna aplikácia. Namiesto prehľadávania histórie chatu kvôli aktuálnej verzii toho, na čom pracujete, artefakt sedí vo vlastnom priestore a Claude ho pri iterácii aktualizuje na mieste.</p>
+    <p>Dôležité rozlíšenie: ak je to, čo Claude vytvorí, určené na jednorazové prečítanie ako súčasť odpovede, zostáva to v chate. Ak je to niečo, čo si ponecháte, upravíte, znova použijete alebo zdieľate ako samostatnú prácu, stáva sa to artefaktom.</p>
+
+    <h4>Čo sa ako artefakt hodí</h4>
+    <ul class="b">
+      <li><b>Dokumenty</b> — správy, briefy, plány, štruktúrované texty, ktoré si ponecháte a budete upravovať</li>
+      <li><b>Kód</b> — skripty, komponenty alebo malé nástroje, najmä čokoľvek, čo spustíte alebo znova použijete</li>
+      <li><b>Vizuály</b> — diagramy, grafy a jednoduché interaktívne rozhrania postavené na reálnom obsahu</li>
+      <li><b>Štruktúrované dáta</b> — tabuľky a obsah v štýle spreadsheetu, na ktorý sa budete chcieť odkazovať</li>
+    </ul>
+
+    <h4>Iterácia na artefakte</h4>
+    <p>Keď artefakt existuje, pokračujete v práci na ňom rovnako, ako by ste pokračovali s Claudom ťah za ťahom: požiadate o prepísanie sekcie, iný štýl grafu, opravenú funkciu. Claude artefakt aktualizuje na mieste namiesto začínania odznova a staršie verzie zostávajú dostupné, ak sa chcete vrátiť.</p>
+    <div class="note"><span class="k">Tip</span>
+      <p>Buďte konkrétni v tom, čo sa má zmeniť a čo má zostať rovnaké — „zachovaj štruktúru, len sprísni úvod“ prinesie čistejší výsledok než „sprav to lepšie“.</p></div>
+
+    <h4>Zdieľanie artefaktu</h4>
+    <p>Hotový artefakt je možné zdieľať ako odkaz, takže si ho môže priamo otvoriť a pozrieť aj niekto bez účtu Claude — užitočné pre správu, ktorú chcete dať prečítať kolegovi, alebo malý nástroj, ktorý chcete, aby niekto iný vyskúšal, bez preposielania súborov tam a späť.</p>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Spomeňte si na niečo, čo pre vás Claude nedávno vytvoril a čo ste nakoniec z chatu skopírovali na použitie inde. Fungovalo by to lepšie ako artefakt od začiatku?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="skills" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 2.3</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Working with skills</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what a Skill is and how it differs from a project</li>
+      <li>Recognize when a repeated task is a good candidate to become a Skill</li>
+      <li>Distinguish Skills from projects so you reach for the right tool</li>
+    </ul>
+
+    <h4>What is a Skill?</h4>
+    <p>A Skill is a packaged set of instructions — and optionally reference files or scripts — that teaches Claude how to carry out a specific, repeatable task exactly the way you want it done, every time. Where a project holds ongoing context for a body of work, a Skill holds a reusable procedure: the steps, the format, the conventions, captured once so you don't have to restate them.</p>
+    <p>Skills can be invoked directly, or Claude can recognize on its own that a Skill applies to what you're asking and use it automatically.</p>
+
+    <h4>When a task is a good candidate for a Skill</h4>
+    <ul class="b">
+      <li>You do the same kind of task repeatedly, with the same expected shape of output</li>
+      <li>There's a "right way" to do it — a house format, a checklist, a specific sequence of steps</li>
+      <li>You want the same behavior available across different conversations and projects, not tied to one workspace</li>
+      <li>The task is precise enough to describe as a procedure, rather than open-ended judgment</li>
+    </ul>
+
+    <h4>Skills versus projects</h4>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>Project</th><th>Skill</th></tr></thead>
+      <tbody>
+        <tr><td>Holds</td><td>Ongoing context: files, conversations, standing instructions for one body of work</td><td>A reusable procedure for one specific, repeatable task</td></tr>
+        <tr><td>Scope</td><td>Tied to that one workspace</td><td>Available across any conversation or project</td></tr>
+        <tr><td>Best for</td><td>A client, a report series, a long-running initiative</td><td>A recurring format or process — a weekly summary, a code review checklist, a document template</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Name one task you do the same way every time, in any project. Would it be better served by a Skill that travels with you everywhere, or does it belong inside one project's ongoing context?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Práca so skillmi</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je Skill a čím sa líši od projektu</li>
+      <li>Rozpoznať, kedy je opakovaná úloha dobrým kandidátom na Skill</li>
+      <li>Rozlíšiť Skills od projektov, aby ste siahli po správnom nástroji</li>
+    </ul>
+
+    <h4>Čo je Skill?</h4>
+    <p>Skill je zabalená sada inštrukcií — voliteľne aj referenčných súborov alebo skriptov — ktorá naučí Clauda, ako vykonať konkrétnu, opakovateľnú úlohu presne tak, ako chcete, zakaždým rovnako. Kým projekt drží prebiehajúci kontext pre kus práce, Skill drží opakovane použiteľný postup: kroky, formát, konvencie, zachytené raz, takže ich nemusíte znova opakovať.</p>
+    <p>Skills je možné vyvolať priamo, alebo Claude sám rozpozná, že sa Skill hodí na to, o čo žiadate, a použije ho automaticky.</p>
+
+    <h4>Kedy je úloha dobrým kandidátom na Skill</h4>
+    <ul class="b">
+      <li>Robíte rovnaký typ úlohy opakovane, s rovnakým očakávaným tvarom výstupu</li>
+      <li>Existuje „správny spôsob“, ako ju robiť — firemný formát, checklist, konkrétna postupnosť krokov</li>
+      <li>Chcete rovnaké správanie dostupné naprieč rôznymi konverzáciami a projektmi, nie viazané na jeden pracovný priestor</li>
+      <li>Úloha je dosť presná na to, aby sa dala opísať ako postup, nie ako otvorený úsudok</li>
+    </ul>
+
+    <h4>Skills verzus projekty</h4>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>Projekt</th><th>Skill</th></tr></thead>
+      <tbody>
+        <tr><td>Drží</td><td>Prebiehajúci kontext: súbory, konverzácie, stále inštrukcie pre jeden kus práce</td><td>Opakovane použiteľný postup pre jednu konkrétnu, opakovanú úlohu</td></tr>
+        <tr><td>Rozsah</td><td>Viazaný na daný pracovný priestor</td><td>Dostupný naprieč akoukoľvek konverzáciou či projektom</td></tr>
+        <tr><td>Najlepšie pre</td><td>Klienta, sériu správ, dlhodobú iniciatívu</td><td>Opakujúci sa formát alebo proces — týždenné zhrnutie, checklist na code review, šablónu dokumentu</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Pomenujte jednu úlohu, ktorú robíte rovnako zakaždým, v ľubovoľnom projekte. Poslúžil by jej lepšie Skill, ktorý cestuje s vami všade, alebo patrí do prebiehajúceho kontextu jedného projektu?</p></div>
+  </div>
+</section>
+<div class="mod">
+  <div class="mod-head"><span class="num">Module 03</span><h2>Expanding Claude's reach</h2></div>
+</div>
+
+<section class="sec" id="connectors" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 3.1</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Connecting your tools</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what a connector is and why Claude benefits from being linked to your actual tools</li>
+      <li>Identify which of your everyday tools are good candidates to connect</li>
+      <li>Recognize MCP as the standard that makes these connections possible</li>
+    </ul>
+
+    <h4>Why connect your tools</h4>
+    <p>On its own, Claude only knows what you tell it in the conversation. A connector links Claude to a tool you already use — a calendar, a docs library, a project tracker, a messaging app — so Claude can pull in real, current information from that tool instead of relying on what you paste in or remember. The difference is between describing your calendar to Claude and letting Claude actually look at it.</p>
+    <p>Once a tool is connected, Claude can reference it the same way a colleague with access would: checking what's already there, pulling the right document, or looking up a fact, without you needing to go find it and copy it over first.</p>
+
+    <h4>MCP: the standard behind connectors</h4>
+    <p>Connectors are built on the <b>Model Context Protocol (MCP)</b>, an open standard for linking AI systems to external tools and data sources. Because it's a shared standard rather than a one-off integration, MCP means new tools can be connected in a consistent way, and connections you set up keep working as both the tools and Claude evolve.</p>
+
+    <h4>Good candidates to connect</h4>
+    <ul class="b">
+      <li>Tools that hold information you reference constantly — a shared drive, a wiki, a ticketing system</li>
+      <li>Tools where "current" matters — a calendar, a live project board, a support inbox</li>
+      <li>Tools you'd otherwise manually copy information out of, over and over</li>
+    </ul>
+
+    <div class="note"><span class="k">Widget: connect a source, ask for more</span>
+      <p>Picture connecting your team's project tracker. Before connecting, you'd ask Claude to draft a status update and then paste in each ticket's details yourself. After connecting, you can just ask: "Summarize what's overdue on the launch board and draft a status update." Claude checks the board directly and works from what's actually there.</p></div>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Which tool do you find yourself copying information out of most often just to hand it to Claude? What would change about your workflow if that tool were connected directly?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Prepájanie vašich nástrojov</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je konektor a prečo je pre Clauda prínosné byť prepojený s vašimi skutočnými nástrojmi</li>
+      <li>Identifikovať, ktoré z vašich bežných nástrojov sú dobrými kandidátmi na prepojenie</li>
+      <li>Rozpoznať MCP ako štandard, ktorý tieto prepojenia umožňuje</li>
+    </ul>
+
+    <h4>Prečo prepájať vaše nástroje</h4>
+    <p>Sám osebe Claude vie len to, čo mu poviete v konverzácii. Konektor prepája Clauda s nástrojom, ktorý už používate — kalendár, knižnica dokumentov, tracker projektov, messagingová aplikácia — takže Claude môže čerpať reálne, aktuálne informácie priamo z tohto nástroja namiesto spoliehania sa na to, čo vložíte alebo si pamätáte. Rozdiel je medzi opisovaním kalendára Claudovi a tým, že sa doň skutočne pozrie.</p>
+    <p>Keď je nástroj prepojený, Claude naň môže odkazovať rovnako ako kolega s prístupom: skontrolovať, čo tam už je, vytiahnuť správny dokument alebo si overiť fakt, bez toho, aby ste to museli najprv sami nájsť a skopírovať.</p>
+
+    <h4>MCP: štandard za konektormi</h4>
+    <p>Konektory sú postavené na <b>Model Context Protocol (MCP)</b>, otvorenom štandarde na prepájanie AI systémov s externými nástrojmi a zdrojmi dát. Keďže ide o zdieľaný štandard namiesto jednorazovej integrácie, MCP znamená, že nové nástroje sa dajú prepájať konzistentným spôsobom a nastavené prepojenia fungujú ďalej aj s vývojom nástrojov aj Clauda.</p>
+
+    <h4>Dobrí kandidáti na prepojenie</h4>
+    <ul class="b">
+      <li>Nástroje s informáciami, na ktoré sa odkazujete neustále — zdieľaný disk, wiki, ticketovací systém</li>
+      <li>Nástroje, kde záleží na „aktuálnosti“ — kalendár, živá projektová tabuľa, support inbox</li>
+      <li>Nástroje, z ktorých by ste inak museli informácie opakovane manuálne kopírovať</li>
+    </ul>
+
+    <div class="note"><span class="k">Widget: prepoj zdroj, žiadaj viac</span>
+      <p>Predstavte si prepojenie projektového trackeru vášho tímu. Pred prepojením by ste Clauda požiadali o návrh statusového updatu a potom by ste ručne vkladali detaily každého ticketu. Po prepojení sa stačí opýtať: „Zhrň, čo mešká na launch tabuli, a navrhni status update.“ Claude si tabuľu skontroluje priamo a pracuje s tým, čo tam skutočne je.</p></div>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Z ktorého nástroja najčastejšie kopírujete informácie len preto, aby ste ich odovzdali Claudovi? Čo by sa zmenilo na vašom workflowe, keby bol tento nástroj priamo prepojený?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="enterprise-search" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 3.2</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Enterprise search</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what Enterprise Search is and what problem it solves</li>
+      <li>Distinguish Enterprise Search from a single connector</li>
+      <li>Recognize the kinds of questions Enterprise Search is built to answer</li>
+    </ul>
+
+    <h4>What is Enterprise Search?</h4>
+    <p>Enterprise Search lets Claude search across all of an organization's connected tools at once — company documents, chat history, tickets, wikis — instead of you having to know which single system holds the answer and open a connector to it directly. Where a single connector is one door into one tool, Enterprise Search is one question asked across every door your organization has opened.</p>
+    <p>This matters because the answer to a real work question often isn't sitting in one place — the decision was made in a meeting summarized in chat, documented in a wiki page, and referenced again in a ticket. Enterprise Search finds it wherever it landed.</p>
+
+    <h4>What it's built to answer</h4>
+    <ul class="b">
+      <li>"What did we decide about X?" — when the decision could be in email, chat, or a doc, and you don't know which</li>
+      <li>"Has anyone already written about Y?" — before duplicating work that might already exist somewhere in the organization</li>
+      <li>"Who owns Z?" — when the answer depends on org knowledge scattered across systems rather than a single source</li>
+    </ul>
+
+    <div class="note"><span class="k">In the product today</span>
+      <p>Enterprise Search is available on plans with the connected data sources an organization has enabled; what it can search depends on what your organization has connected.</p></div>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Think of a question you've asked a colleague recently because you didn't know which system held the answer. Would Enterprise Search have found it directly?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Enterprise Search</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je Enterprise Search a aký problém rieši</li>
+      <li>Odlíšiť Enterprise Search od jedného konektora</li>
+      <li>Rozpoznať typy otázok, na ktoré je Enterprise Search určený</li>
+    </ul>
+
+    <h4>Čo je Enterprise Search?</h4>
+    <p>Enterprise Search umožňuje Claudovi vyhľadávať naprieč všetkými prepojenými nástrojmi organizácie naraz — firemné dokumenty, históriu chatu, tickety, wiki — namiesto toho, aby ste museli vedieť, ktorý jediný systém obsahuje odpoveď, a otvoriť konektor priamo naň. Kým jeden konektor sú jedny dvere do jedného nástroja, Enterprise Search je jedna otázka položená naprieč všetkými dverami, ktoré vaša organizácia otvorila.</p>
+    <p>Na tom záleží, lebo odpoveď na skutočnú pracovnú otázku často neleží na jednom mieste — rozhodnutie padlo na porade zhrnutej v chate, zdokumentované na wiki stránke a znova spomenuté v ticketu. Enterprise Search ho nájde tam, kde skutočne pristálo.</p>
+
+    <h4>Na čo je určený</h4>
+    <ul class="b">
+      <li>„Čo sme sa rozhodli ohľadom X?“ — keď rozhodnutie môže byť v emaile, chate alebo dokumente a neviete, kde presne</li>
+      <li>„Písal už niekto o Y?“ — pred duplikovaním práce, ktorá už možno niekde v organizácii existuje</li>
+      <li>„Kto má na starosti Z?“ — keď odpoveď závisí od firemných znalostí rozptýlených naprieč systémami namiesto jedného zdroja</li>
+    </ul>
+
+    <div class="note"><span class="k">V produkte dnes</span>
+      <p>Enterprise Search je dostupný na plánoch s prepojenými zdrojmi dát, ktoré si organizácia zapla; čo dokáže prehľadávať, závisí od toho, čo vaša organizácia pripojila.</p></div>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Spomeňte si na otázku, ktorú ste nedávno položili kolegovi, lebo ste nevedeli, ktorý systém obsahuje odpoveď. Našiel by ju Enterprise Search priamo?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="research" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 3.3</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Research for deep dives</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Explain what Research mode is and how it differs from a quick web search</li>
+      <li>Recognize when a question calls for Research rather than a faster tool</li>
+      <li>Route a set of realistic questions to the right tool: Research, quick web search, Thinking, or Enterprise Search</li>
+    </ul>
+
+    <h4>What is Research?</h4>
+    <p>Research is built for open-ended questions that need real investigation — Claude plans a research approach, searches across many sources, follows leads as they turn up, and synthesizes what it finds into a structured answer with citations. It's built for depth and breadth: minutes of investigation instead of a single lookup, across dozens of sources instead of the first few results.</p>
+    <p>This is a different tool from a quick web search, which answers a question that has one clear, current answer somewhere on the web. Research is for the question that doesn't have one answer waiting — it has to be built by gathering, comparing, and weighing multiple sources.</p>
+
+    <h4>When to reach for Research</h4>
+    <ul class="b">
+      <li>The question requires synthesizing information from multiple, possibly conflicting sources</li>
+      <li>You need breadth — a landscape view of a topic, not one fact</li>
+      <li>The answer benefits from citations you can go verify yourself</li>
+      <li>You have a few minutes to let Claude work, rather than needing an instant answer</li>
+    </ul>
+    <p>Reach for a quick web search instead when you need one current fact fast — today's exchange rate, whether a store is open, the latest version number of a tool.</p>
+
+    <h4>Widget: Research or not?</h4>
+    <p>For each question below, decide which tool fits best — Research, a quick web search, Thinking, or Enterprise Search — then reveal the reasoning.</p>
+    <div class="card" data-reveal="research-quiz">
+      <ol class="b" style="list-style:decimal;padding-left:1.2rem">
+        <li>"What's the current stock price of a company?"</li>
+        <li>"How are our top three competitors positioning their new products, and what does that suggest for our own launch?"</li>
+        <li>"Walk me through the logic of this pricing model step by step before you answer."</li>
+        <li>"What did our team decide about the vendor contract last quarter?"</li>
+        <li>"Summarize the current academic consensus on a topic, with sources I can check."</li>
+      </ol>
+      <button class="rbtn" type="button">Show reasoning</button>
+      <div class="hidden-until-reveal">
+        <ol class="b" style="list-style:decimal;padding-left:1.2rem">
+          <li><b>A quick web search</b> — one current fact, one clear answer.</li>
+          <li><b>Research</b> — synthesis across many sources into a structured, comparative view.</li>
+          <li><b>Thinking</b> — the value is in Claude's own reasoning process, not external information.</li>
+          <li><b>Enterprise Search</b> — the answer lives somewhere inside the organization's own connected tools, not on the open web.</li>
+          <li><b>Research</b> — breadth, synthesis, and citations across many sources.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Think of a question you researched manually this month — opening several tabs, comparing what you found. Would Research have handled it, or was a quick web search all you actually needed?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Research pre hĺbkové ponory</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vysvetliť, čo je režim Research a čím sa líši od rýchleho webového vyhľadávania</li>
+      <li>Rozpoznať, kedy otázka volá po Research namiesto rýchlejšieho nástroja</li>
+      <li>Priradiť sadu reálnych otázok správnemu nástroju: Research, rýchle webové vyhľadávanie, Thinking alebo Enterprise Search</li>
+    </ul>
+
+    <h4>Čo je Research?</h4>
+    <p>Research je určený na otvorené otázky vyžadujúce skutočné bádanie — Claude naplánuje postup výskumu, prehľadá množstvo zdrojov, sleduje stopy, ako sa objavujú, a syntetizuje zistenia do štruktúrovanej odpovede s citáciami. Je stavaný na hĺbku a šírku: minúty bádania namiesto jedného vyhľadania, naprieč desiatkami zdrojov namiesto prvých pár výsledkov.</p>
+    <p>Toto je iný nástroj než rýchle webové vyhľadávanie, ktoré odpovie na otázku s jednou jasnou, aktuálnou odpoveďou niekde na webe. Research je pre otázku, na ktorú nečaká jedna hotová odpoveď — musí sa zostaviť zbieraním, porovnávaním a vážením viacerých zdrojov.</p>
+
+    <h4>Kedy siahnuť po Research</h4>
+    <ul class="b">
+      <li>Otázka vyžaduje syntézu informácií z viacerých, možno protichodných zdrojov</li>
+      <li>Potrebujete šírku — pohľad na krajinu témy, nie jeden fakt</li>
+      <li>Odpoveď profituje z citácií, ktoré si môžete sami overiť</li>
+      <li>Máte pár minút na to, aby Claude pracoval, namiesto potreby okamžitej odpovede</li>
+    </ul>
+    <p>Siahnite radšej po rýchlom webovom vyhľadávaní, keď potrebujete jeden aktuálny fakt rýchlo — dnešný výmenný kurz, či je obchod otvorený, najnovšie číslo verzie nástroja.</p>
+
+    <h4>Widget: Research, alebo nie?</h4>
+    <p>Pre každú otázku nižšie rozhodnite, ktorý nástroj sedí najlepšie — Research, rýchle webové vyhľadávanie, Thinking alebo Enterprise Search — a potom si zobrazte odôvodnenie.</p>
+    <div class="card" data-reveal="research-quiz">
+      <ol class="b" style="list-style:decimal;padding-left:1.2rem">
+        <li>„Aká je aktuálna cena akcie danej spoločnosti?“</li>
+        <li>„Ako sa naši traja hlavní konkurenti pozicionujú so svojimi novými produktmi a čo to naznačuje pre náš vlastný launch?“</li>
+        <li>„Prejdi so mnou logiku tohto cenového modelu krok za krokom, než odpovieš.“</li>
+        <li>„Čo sme sa v tíme rozhodli ohľadom zmluvy s dodávateľom minulý štvrťrok?“</li>
+        <li>„Zhrň aktuálny akademický konsenzus k téme, so zdrojmi, ktoré si môžem overiť.“</li>
+      </ol>
+      <button class="rbtn" type="button">Zobraz odôvodnenie</button>
+      <div class="hidden-until-reveal">
+        <ol class="b" style="list-style:decimal;padding-left:1.2rem">
+          <li><b>Rýchle webové vyhľadávanie</b> — jeden aktuálny fakt, jedna jasná odpoveď.</li>
+          <li><b>Research</b> — syntéza naprieč mnohými zdrojmi do štruktúrovaného, porovnávacieho pohľadu.</li>
+          <li><b>Thinking</b> — hodnota je v samotnom myšlienkovom procese Clauda, nie vo externých informáciách.</li>
+          <li><b>Enterprise Search</b> — odpoveď žije niekde vo vnútri prepojených nástrojov organizácie, nie na otvorenom webe.</li>
+          <li><b>Research</b> — šírka, syntéza a citácie naprieč mnohými zdrojmi.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Spomeňte si na otázku, ktorú ste tento mesiac skúmali manuálne — otváranie viacerých kariet, porovnávanie zistení. Zvládol by to Research, alebo vám stačilo rýchle webové vyhľadávanie?</p></div>
+  </div>
+</section>
+<div class="mod">
+  <div class="mod-head"><span class="num">Module 04</span><h2>Putting it all together</h2></div>
+</div>
+
+<section class="sec" id="use-cases" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 4.1</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Claude in action: use-cases by role</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>See how the concepts from this course — chat, projects, artifacts, skills, connectors, research — combine in real day-to-day work</li>
+      <li>Recognize patterns in your own role that map to these use-cases</li>
+    </ul>
+
+    <p>The tools covered in this course aren't used one at a time — in practice, a single piece of work usually reaches for several of them together. A few representative examples, by role:</p>
+
+    <h4>Sales</h4>
+    <ul class="b">
+      <li>Preparing for a client call by pulling account history from connected tools and drafting talking points</li>
+      <li>Turning call notes into a structured follow-up email as an artifact, ready to send</li>
+      <li>Keeping a running project per account, with pricing guidelines and past correspondence as project knowledge</li>
+    </ul>
+
+    <h4>Marketing</h4>
+    <ul class="b">
+      <li>Researching how competitors are positioning a launch before drafting campaign messaging</li>
+      <li>Building a campaign brief as an artifact that the whole team iterates on together</li>
+      <li>Using a Skill to keep every campaign brief in the same house format</li>
+    </ul>
+
+    <h4>Product and engineering</h4>
+    <ul class="b">
+      <li>Using Claude Code to read a codebase, propose a fix, and open the change for review</li>
+      <li>Drafting a spec as an artifact, then handing off implementation questions in chat</li>
+      <li>Searching across tickets and design docs with Enterprise Search before starting a new feature, to avoid re-solving a decided question</li>
+    </ul>
+
+    <h4>Operations and support</h4>
+    <ul class="b">
+      <li>Handing off a recurring weekly reporting task to run on a schedule, pulling from connected data sources</li>
+      <li>Using Research to understand a new regulation or vendor before a decision is made</li>
+      <li>Keeping a project per process, with the standard procedure documented as project knowledge everyone on the team can rely on</li>
+    </ul>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Pick the role closest to your own work, or blend two. Which single example above is closest to something you actually did this week — and which capability from this course would have made it faster?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Claude v praxi: use-case podľa role</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Vidieť, ako sa koncepty z tohto kurzu — chat, projekty, artefakty, skills, konektory, research — kombinujú v reálnej každodennej práci</li>
+      <li>Rozpoznať vzory vo vlastnej role, ktoré zodpovedajú týmto use-case</li>
+    </ul>
+
+    <p>Nástroje z tohto kurzu sa nepoužívajú po jednom — v praxi jeden kus práce zvyčajne siaha po viacerých naraz. Niekoľko reprezentatívnych príkladov podľa role:</p>
+
+    <h4>Predaj</h4>
+    <ul class="b">
+      <li>Príprava na hovor s klientom vytiahnutím histórie účtu z prepojených nástrojov a návrhom bodov na rozhovor</li>
+      <li>Premena poznámok z hovoru na štruktúrovaný follow-up email ako artefakt, pripravený na odoslanie</li>
+      <li>Vedenie priebežného projektu pre každý účet, s cenovými pravidlami a staršou korešpondenciou ako znalosťami projektu</li>
+    </ul>
+
+    <h4>Marketing</h4>
+    <ul class="b">
+      <li>Skúmanie, ako konkurencia pozicionuje launch, ešte pred návrhom kampaňového posolstva</li>
+      <li>Zostavenie kampaňového briefu ako artefaktu, na ktorom iteruje celý tím spoločne</li>
+      <li>Použitie Skillu na udržanie rovnakého firemného formátu pre každý kampaňový brief</li>
+    </ul>
+
+    <h4>Produkt a inžinierstvo</h4>
+    <ul class="b">
+      <li>Použitie Claude Code na prečítanie repozitára, návrh opravy a otvorenie zmeny na review</li>
+      <li>Návrh špecifikácie ako artefaktu, s odovzdaním implementačných otázok následne v chate</li>
+      <li>Prehľadávanie ticketov a návrhových dokumentov cez Enterprise Search pred začatím novej funkcie, aby sa neriešila už rozhodnutá otázka znova</li>
+    </ul>
+
+    <h4>Operácie a podpora</h4>
+    <ul class="b">
+      <li>Odovzdanie opakujúcej sa týždennej reportovacej úlohy na beh podľa harmonogramu, čerpajúcej z prepojených zdrojov dát</li>
+      <li>Použitie Research na pochopenie novej regulácie alebo dodávateľa pred rozhodnutím</li>
+      <li>Vedenie projektu pre každý proces, so štandardným postupom zdokumentovaným ako znalosti projektu, na ktoré sa môže spoľahnúť celý tím</li>
+    </ul>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>Vyberte rolu najbližšiu vašej práci, alebo skombinujte dve. Ktorý jeden príklad vyššie je najbližšie niečomu, čo ste reálne robili tento týždeň — a ktorá schopnosť z tohto kurzu by to urýchlila?</p></div>
+  </div>
+</section>
+
+<section class="sec" id="other-ways" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 4.2</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Other ways to work with Claude</h3>
+
+    <h4>By the end of this lesson</h4>
+    <ul class="b">
+      <li>Recognize that Claude extends beyond the desktop app, into the tools you already work in</li>
+      <li>Match a work context to the right way of reaching Claude</li>
+    </ul>
+
+    <p>Everything covered so far runs in the Claude desktop app, but Claude also meets you inside the applications you already use, so you don't have to leave them to get help.</p>
+
+    <div class="tw"><table>
+      <thead><tr><th>Tool</th><th>Best for</th><th>Where it runs</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Design</td><td>Working with design files and visual assets directly</td><td>Inside your design workflow</td></tr>
+        <tr><td>Claude for Excel</td><td>Formulas, analysis, and cleanup inside a live spreadsheet</td><td>Microsoft Excel</td></tr>
+        <tr><td>Claude for PowerPoint</td><td>Building and refining a deck without leaving the slide editor</td><td>Microsoft PowerPoint</td></tr>
+        <tr><td>Claude for Word</td><td>Drafting and editing long documents in place</td><td>Microsoft Word</td></tr>
+        <tr><td>Claude for Outlook</td><td>Drafting replies and summarizing threads inside your inbox</td><td>Microsoft Outlook</td></tr>
+        <tr><td>Claude in Chrome</td><td>Getting help with whatever page you're actively browsing</td><td>Chrome browser</td></tr>
+        <tr><td>Claude Code</td><td>Reading, writing, and running code in a real codebase</td><td>Terminal, IDE, or the desktop app's Code tab</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>The common thread: rather than copying content out to a chat window and pasting results back in, Claude works where the content already lives.</p>
+
+    <div class="note"><span class="k">Lesson reflection</span>
+      <p>Which application from the table do you spend the most time in during a typical week? What would change if Claude were available right there, instead of in a separate window?</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Ďalšie spôsoby práce s Claudom</h3>
+
+    <h4>Po tejto lekcii budete vedieť</h4>
+    <ul class="b">
+      <li>Rozpoznať, že Claude presahuje desktopovú aplikáciu, priamo do nástrojov, ktoré už používate</li>
+      <li>Priradiť pracovný kontext k správnemu spôsobu, ako Clauda osloviť</li>
+    </ul>
+
+    <p>Všetko doteraz prebiehalo v desktopovej aplikácii Claude, ale Claude vás stretáva aj priamo v aplikáciách, ktoré už používate, takže ich nemusíte opúšťať, aby ste získali pomoc.</p>
+
+    <div class="tw"><table>
+      <thead><tr><th>Nástroj</th><th>Najlepšie pre</th><th>Kde beží</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Design</td><td>Prácu s návrhovými súbormi a vizuálnymi podkladmi priamo</td><td>Vo vašom dizajnérskom workflowe</td></tr>
+        <tr><td>Claude for Excel</td><td>Vzorce, analýzu a čistenie priamo v živej tabuľke</td><td>Microsoft Excel</td></tr>
+        <tr><td>Claude for PowerPoint</td><td>Stavanie a doladenie prezentácie bez opustenia editora snímok</td><td>Microsoft PowerPoint</td></tr>
+        <tr><td>Claude for Word</td><td>Písanie a úpravu dlhých dokumentov na mieste</td><td>Microsoft Word</td></tr>
+        <tr><td>Claude for Outlook</td><td>Návrh odpovedí a zhrnutie vlákien priamo v schránke</td><td>Microsoft Outlook</td></tr>
+        <tr><td>Claude in Chrome</td><td>Pomoc s tým, čo práve prezeráte</td><td>Prehliadač Chrome</td></tr>
+        <tr><td>Claude Code</td><td>Čítanie, písanie a spúšťanie kódu v reálnom repozitári</td><td>Terminál, IDE alebo karta Code v desktopovej aplikácii</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>Spoločná niť: namiesto kopírovania obsahu do chatového okna a vkladania výsledkov späť Claude pracuje priamo tam, kde obsah už žije.</p>
+
+    <div class="note"><span class="k">Zamyslenie</span>
+      <p>V ktorej aplikácii z tabuľky trávite počas bežného týždňa najviac času? Čo by sa zmenilo, keby bol Claude dostupný priamo tam, namiesto samostatného okna?</p></div>
+  </div>
+</section>
+<div class="mod">
+  <div class="mod-head"><span class="num">Module 05</span><h2>Conclusion &amp; certificate</h2></div>
+</div>
+
+<section class="sec" id="whats-next" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Lesson 5.1</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>What's next?</h3>
+
+    <h4>Recap: the five modules</h4>
+    <dl class="d">
+      <dt>01 · Meet Claude</dt><dd>What Claude is and the principles behind it; how to write an effective prompt (setting the stage, defining the task, specifying rules); troubleshooting common issues and the 4D Framework for AI Fluency; and the three shapes of desktop work — chat, hand-off, and Claude Code.</dd>
+      <dt>02 · Organizing your work and knowledge</dt><dd>Projects hold ongoing context so you stop re-explaining background; artifacts hold substantial outputs you iterate on and share; Skills hold a reusable procedure for a recurring task, available anywhere.</dd>
+      <dt>03 · Expanding Claude's reach</dt><dd>Connectors link Claude to one tool you use; Enterprise Search searches across every connected tool at once; Research plans, gathers, and synthesizes across many sources for open-ended questions.</dd>
+      <dt>04 · Putting it all together</dt><dd>These capabilities combine in real work across sales, marketing, product, and operations — and Claude meets you inside the tools you already use, from Excel to Chrome to a codebase.</dd>
+    </dl>
+
+    <h4>Keep building the habit</h4>
+    <p>Fluency with Claude comes from use, not from finishing a course. The single most useful next step is picking one recurring piece of your own work and deliberately routing it through what you've just learned: is it a quick back-and-forth, a task to hand off, or something worth turning into a project or a Skill?</p>
+
+    <h4>Additional resources</h4>
+    <ul class="b">
+      <li>Anthropic's own guides on prompting and effective use of Claude, for going deeper on any single topic in this course</li>
+      <li>Release notes and product documentation, for tracking new capabilities as they ship</li>
+      <li>The Claude Platform &amp; Model Foundations course, for the model and platform concepts underneath everything covered here</li>
+    </ul>
+
+    <div class="note"><span class="k">A note on this section</span>
+      <p>The source course lists a "Certificate of Completion Quiz" and a certificate step here, but ships no questions for either. This study page substitutes its own self-test below, built from the course's own worked exercises, so the review still has something to check itself against.</p></div>
+
+    <div class="note"><span class="k">Closing</span>
+      <p>You now know what Claude is, how to talk to it well, where to put ongoing work so it doesn't scatter, how to extend its reach into your tools and the web, and which shape a piece of work actually calls for. That's the whole toolkit — the rest is practice.</p></div>
+  </div>
+
+  <div class="sk">
+    <h3>Čo bude ďalej?</h3>
+
+    <h4>Zhrnutie: päť modulov</h4>
+    <dl class="d">
+      <dt>01 · Spoznajte Clauda</dt><dd>Čo je Claude a princípy, na ktorých stojí; ako napísať efektívny prompt (nastavenie scény, definovanie úlohy, určenie pravidiel); riešenie bežných problémov a 4D Framework for AI Fluency; a tri podoby práce na desktope — chat, odovzdanie a Claude Code.</dd>
+      <dt>02 · Organizovanie práce a znalostí</dt><dd>Projekty držia prebiehajúci kontext, aby ste prestali opakovane vysvetľovať pozadie; artefakty držia podstatné výstupy, na ktorých iterujete a ktoré zdieľate; Skills držia opakovane použiteľný postup pre opakujúcu sa úlohu, dostupný kdekoľvek.</dd>
+      <dt>03 · Rozšírenie dosahu Clauda</dt><dd>Konektory prepájajú Clauda s jedným nástrojom, ktorý používate; Enterprise Search prehľadáva naraz všetky prepojené nástroje; Research plánuje, zbiera a syntetizuje naprieč mnohými zdrojmi pri otvorených otázkach.</dd>
+      <dt>04 · Poskladanie všetkého dokopy</dt><dd>Tieto schopnosti sa kombinujú v reálnej práci naprieč predajom, marketingom, produktom a operáciami — a Claude vás stretáva priamo v nástrojoch, ktoré už používate, od Excelu cez Chrome až po repozitár.</dd>
+    </dl>
+
+    <h4>Udržte si návyk</h4>
+    <p>Zdatnosť v práci s Claudom prichádza z používania, nie z dokončenia kurzu. Najužitočnejší ďalší krok je vybrať si jeden opakujúci sa kus vlastnej práce a zámerne ho previesť cez to, čo ste sa práve naučili: je to rýchla výmena, úloha na odovzdanie, alebo niečo, čo stojí za to premeniť na projekt či Skill?</p>
+
+    <h4>Ďalšie zdroje</h4>
+    <ul class="b">
+      <li>Vlastné návody Anthropicu k promptovaniu a efektívnemu používaniu Clauda, na prehĺbenie ktorejkoľvek témy z tohto kurzu</li>
+      <li>Poznámky k vydaniam a produktová dokumentácia, na sledovanie nových schopností, ako prichádzajú</li>
+      <li>Kurz Claude Platform &amp; Model Foundations, pre koncepty modelu a platformy, ktoré stoja za všetkým z tohto kurzu</li>
+    </ul>
+
+    <div class="note"><span class="k">Poznámka k tejto sekcii</span>
+      <p>Zdrojový kurz na tomto mieste uvádza „Certificate of Completion Quiz“ a krok s certifikátom, no bez akýchkoľvek otázok. Táto študijná stránka preto nižšie ponúka vlastný self-test, postavený na vlastných precvičovaných úlohách kurzu, aby si opakovanie malo na čom overiť samo seba.</p></div>
+
+    <div class="note"><span class="k">Záver</span>
+      <p>Teraz viete, čo je Claude, ako s ním dobre komunikovať, kam uložiť prebiehajúcu prácu, aby sa nerozptýlila, ako rozšíriť jeho dosah do vašich nástrojov a webu, a akú podobu daná práca skutočne vyžaduje. To je celý nástrojník — zvyšok je prax.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="self-test" data-lang="en">
+  <div class="rail">
+    <span class="lbl">Self-test</span>
+    <span class="pill lswitch">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="sk" aria-pressed="false">SK</button>
+    </span>
+  </div>
+
+  <div class="en">
+    <h3>Check yourself</h3>
+    <p>The source course's own quiz ships empty, so this self-test is built from the two worked exercises inside the material — <a href="#what-is-claude">Sort six requests</a> in Lesson 1.1 and <a href="#research">Research or not?</a> in Lesson 3.3 — plus five questions covering the rest of the course. Pick an answer in your head, then reveal.</p>
+
+    <div class="qs">
+      <div class="q" data-reveal="qz1">
+        <div class="q-head"><span class="qn">Question 1</span></div>
+        <p>A colleague asks: "What's the exchange rate today?" versus "Help me figure out what this customer is actually asking for in their complaint." What actually separates these two requests?</p>
+        <ol class="opts">
+          <li>The first is shorter than the second</li>
+          <li class="correct">The first has one clear answer a search box could give; the second needs your judgment folded into the answer</li>
+          <li>The first is about numbers, the second is about words</li>
+        </ol>
+        <button class="rbtn" type="button">Show answer</button>
+      </div>
+
+      <div class="q" data-reveal="qz2">
+        <div class="q-head"><span class="qn">Question 2</span></div>
+        <p>You need a weekly report pulled from three connected tools, formatted the same way every Monday, running before you sit down at your desk. Which shape of work is this?</p>
+        <ol class="opts">
+          <li>Working with Claude, turn by turn</li>
+          <li class="correct">Handing work off to Claude</li>
+          <li>Building software with Claude Code</li>
+        </ol>
+        <button class="rbtn" type="button">Show answer</button>
+      </div>
+
+      <div class="q" data-reveal="qz3">
+        <div class="q-head"><span class="qn">Question 3</span></div>
+        <p>Your team keeps re-explaining the same client background at the start of every new chat, and wants one house format applied automatically to every weekly status email. What do you set up for each need?</p>
+        <ol class="opts">
+          <li class="correct">A project for the client background; a Skill for the recurring email format</li>
+          <li>A Skill for the client background; a project for the recurring email format</li>
+          <li>A project for both</li>
+        </ol>
+        <button class="rbtn" type="button">Show answer</button>
+      </div>
+
+      <div class="q" data-reveal="qz4">
+        <div class="q-head"><span class="qn">Question 4</span></div>
+        <p>"What did we decide about the vendor contract last quarter?" — the decision could be in email, chat, or a wiki page, and you don't know which. What's the right tool?</p>
+        <ol class="opts">
+          <li>A single connector to one of those tools</li>
+          <li class="correct">Enterprise Search, across all connected tools at once</li>
+          <li>Research, out on the open web</li>
+        </ol>
+        <button class="rbtn" type="button">Show answer</button>
+      </div>
+
+      <div class="q" data-reveal="qz5">
+        <div class="q-head"><span class="qn">Question 5</span></div>
+        <p>Which 4D Framework competency is at work when you critically evaluate whether Claude's output is actually accurate before you use it?</p>
+        <ol class="opts">
+          <li>Delegation</li>
+          <li>Description</li>
+          <li class="correct">Discernment</li>
+        </ol>
+        <button class="rbtn" type="button">Show answer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk">
+    <h3>Preverte sa</h3>
+    <p>Vlastný kvíz zdrojového kurzu je prázdny, preto je tento self-test postavený na dvoch precvičovaných úlohách z materiálu — <a href="#what-is-claude">Roztrieďte šesť požiadaviek</a> v lekcii 1.1 a <a href="#research">Research, alebo nie?</a> v lekcii 3.3 — plus päť otázok pokrývajúcich zvyšok kurzu. V hlave si vyberte odpoveď a potom si ju zobrazte.</p>
+
+    <div class="qs">
+      <div class="q" data-reveal="qz1">
+        <div class="q-head"><span class="qn">Otázka 1</span></div>
+        <p>Kolega sa pýta: „Aký je dnes výmenný kurz?“ oproti „Pomôž mi zistiť, o čo tento zákazník v sťažnosti v skutočnosti žiada.“ Čo v skutočnosti tieto dve požiadavky odlišuje?</p>
+        <ol class="opts">
+          <li>Prvá je kratšia než druhá</li>
+          <li class="correct">Prvá má jednu jasnú odpoveď, ktorú by dalo aj vyhľadávacie okno; druhá potrebuje váš úsudok zapracovaný do odpovede</li>
+          <li>Prvá je o číslach, druhá o slovách</li>
+        </ol>
+        <button class="rbtn" type="button">Zobraz odpoveď</button>
+      </div>
+
+      <div class="q" data-reveal="qz2">
+        <div class="q-head"><span class="qn">Otázka 2</span></div>
+        <p>Potrebujete týždennú správu vyťahovanú z troch prepojených nástrojov, formátovanú rovnako každý pondelok, bežiacu skôr, než si sadnete k počítaču. Aká podoba práce to je?</p>
+        <ol class="opts">
+          <li>Práca s Claudom ťah za ťahom</li>
+          <li class="correct">Odovzdanie práce Claudovi</li>
+          <li>Stavanie softvéru s Claude Code</li>
+        </ol>
+        <button class="rbtn" type="button">Zobraz odpoveď</button>
+      </div>
+
+      <div class="q" data-reveal="qz3">
+        <div class="q-head"><span class="qn">Otázka 3</span></div>
+        <p>Váš tím opakovane vysvetľuje rovnaké pozadie klienta na začiatku každého nového chatu a chce jeden firemný formát automaticky aplikovaný na každý týždenný status email. Čo nastavíte pre každú z potrieb?</p>
+        <ol class="opts">
+          <li class="correct">Projekt pre pozadie klienta; Skill pre opakujúci sa formát emailu</li>
+          <li>Skill pre pozadie klienta; projekt pre opakujúci sa formát emailu</li>
+          <li>Projekt pre obe</li>
+        </ol>
+        <button class="rbtn" type="button">Zobraz odpoveď</button>
+      </div>
+
+      <div class="q" data-reveal="qz4">
+        <div class="q-head"><span class="qn">Otázka 4</span></div>
+        <p>„Čo sme sa rozhodli ohľadom zmluvy s dodávateľom minulý štvrťrok?“ — rozhodnutie môže byť v emaile, chate alebo na wiki stránke a neviete kde presne. Aký nástroj je správny?</p>
+        <ol class="opts">
+          <li>Jeden konektor na jeden z týchto nástrojov</li>
+          <li class="correct">Enterprise Search, naprieč všetkými prepojenými nástrojmi naraz</li>
+          <li>Research, na otvorenom webe</li>
+        </ol>
+        <button class="rbtn" type="button">Zobraz odpoveď</button>
+      </div>
+
+      <div class="q" data-reveal="qz5">
+        <div class="q-head"><span class="qn">Otázka 5</span></div>
+        <p>Ktorá kompetencia 4D Frameworku je v hre, keď kriticky vyhodnotíte, či je výstup Clauda naozaj presný, ešte pred jeho použitím?</p>
+        <ol class="opts">
+          <li>Delegation</li>
+          <li>Description</li>
+          <li class="correct">Discernment</li>
+        </ol>
+        <button class="rbtn" type="button">Zobraz odpoveď</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>Sources</h4>
+    <ul>
+      <li>Claude 101 — Anthropic prep course module (Claude Certified Associate: Foundations), extracted to <a href="../Claude%20101.md">Claude 101.md</a>.</li>
+      <li>Sibling page: <a href="claude-platform-model-foundations.html">Claude Platform &amp; Model Foundations</a>.</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function setLang(root, lang){
+    root.setAttribute('data-lang', lang);
+    root.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+      if (btn.closest('[data-lang]') !== root) return;
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === lang ? 'true' : 'false');
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    var langBtn = e.target.closest('[data-lang-btn]');
+    if (langBtn) {
+      var root = langBtn.closest('[data-lang]');
+      if (root) setLang(root, langBtn.getAttribute('data-lang-btn'));
+      return;
+    }
+
+    var allBtn = e.target.closest('[data-all]');
+    if (allBtn) {
+      var lang = allBtn.getAttribute('data-all');
+      document.querySelectorAll('[data-lang]').forEach(function(root){ setLang(root, lang); });
+      document.querySelectorAll('.gswitch [data-all]').forEach(function(b){
+        b.setAttribute('aria-pressed', b.getAttribute('data-all') === lang ? 'true' : 'false');
+      });
+      return;
+    }
+
+    var rbtn = e.target.closest('.rbtn');
+    if (rbtn) {
+      var host = rbtn.closest('[data-reveal]');
+      if (!host) return;
+      var name = host.getAttribute('data-reveal');
+      document.querySelectorAll('[data-reveal]').forEach(function(el){
+        if (el.getAttribute('data-reveal') === name) el.classList.add('revealed');
+      });
+    }
+  });
+})();
+</script>
